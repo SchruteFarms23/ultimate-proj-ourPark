@@ -1,8 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import MapInfoWindow from './MapInfoWindow'
 
 
 export default class MapComponent extends React.Component {
+
+  doCheckIn = (parkId) =>{
+    console.log(parkId,"tried to check in")
+    //Do a fetch here that assigns a user to a park
+    //Then redirect to Park Page
+  }
 
 
 
@@ -14,6 +21,7 @@ export default class MapComponent extends React.Component {
       this.loadMap();
     }
   }
+
   loadMap() {
     if (this.props && this.props.google) {
       console.log("also working")
@@ -37,21 +45,39 @@ export default class MapComponent extends React.Component {
           map: this.map,
           title: park.name
         });
-        var content = '<div id="iw-container">' +
-                   '<div class="iw-title">${park.name}</div>' +
-                   '<div class="iw-content">' +
-                     '<div class="iw-subTitle">History</div>' +
-                     '<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
-                     '<p>Founded in 1824, the Porcelain Factory of Vista Alegre was the first industrial unit dedicated to porcelain production in Portugal. For the foundation and success of this risky industrial development was crucial the spirit of persistence of its founder, José Ferreira Pinto Basto. Leading figure in Portuguese society of the nineteenth century farm owner, daring dealer, wisely incorporated the liberal ideas of the century, having become "the first example of free enterprise" in Portugal.</p>' +
-                     '<div class="iw-subTitle">Contacts</div>' +
-                     '<p>VISTA ALEGRE ATLANTIS, SA<br>3830-292 Ílhavo - Portugal<br>'+
-                     '<br>Phone. +351 234 320 600<br>e-mail: geral@vaa.pt<br>www: www.myvistaalegre.com</p>'+
-                   '</div>' +
-                   '<div class="iw-bottom-gradient"></div>' +
-                 '</div>';
+        if (park.users.length > 0){
+          var users = park.users.map(user => `<li>${user.name}</li>`).join('')
+
+        }else{
+          users = "No one is in the park."
+        }
+        // console.log(this.doCheckIn)
+
+        const checkin = `<button id = "checkin">Check In!</button>`
+
+        var content = `<div id="iw-container">` +
+                   `<div class="iw-title">${park.name}</div>` +
+                   `<div class="iw-content">` +
+                     `<img src="https://i.pinimg.com/736x/85/ee/0d/85ee0d3d32c5a4c46748a2f5c12a01b1--basketball-clipart-girls-basketball.jpg"  height="115" width="100">` +
+                     users +
+                     checkin +
+                 `</div>`
+                 ;
       var infowindow = new google.maps.InfoWindow({
-          content: park.name
+          content: content
         });
+
+        let that = this
+
+        google.maps.event.addListener(infowindow, 'domready', function() {
+    document.getElementById("checkin").addEventListener("click", function(){
+      console.log(park.id)
+      that.doCheckIn(park.id);
+
+
+    });
+    });
+
         marker.addListener('click', function() {
           infowindow.open(this.map, marker);
         });
