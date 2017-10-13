@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import MapInfoWindow from './MapInfoWindow'
+import { connect } from 'react-redux'
 
 
 export default class MapComponent extends React.Component {
@@ -89,7 +90,7 @@ export default class MapComponent extends React.Component {
 
   render() {
     const style = {
-      width: '100vw',
+      width: '85vw',
       height: '75vh'
     }
 
