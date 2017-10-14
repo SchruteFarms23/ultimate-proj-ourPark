@@ -23,9 +23,15 @@ class SignUp extends React.Component {
 		// console.log("hi")
 		// console.log(this.state.username)
 		// console.log(this.state.password)
+		if(this.state.password === this.state.passwordConfirm){
 		const signupParams = {
-    		username: this.state.username,
-    		password: this.state.password }
+    		email: this.state.email,
+				name:this.state.name,
+    		password: this.state.password,
+				weight:this.state.weight,
+				height:this.state.height,
+				image_url:this.state.image_url
+			}
     	const body= JSON.stringify(signupParams)
     	return fetch("http://localhost:3000/users",{
     		method: 'post',
@@ -36,47 +42,30 @@ class SignUp extends React.Component {
     	}
   		})
     	.then((res) => {
+				console.log(res)
       	return res.json()})
       	.then((user) => {
+					console.log(user)
 			localStorage.setItem("jwtToken", user.jwt)
 			})
-    	.then((res) => this.props.history.push('/myProfile'))
+    	.then((res) => this.props.history.push('/'))
+		}else{
+			alert("Passwords do not match")
+		}
 
 	}
 
 
-  //   event.preventDefault()
-  //   var apiBaseUrl = "http://localhost:3000/users";
-  //   var self = this;
-  //   if (this.state.username.length > 0 && this.state.password.lenght > 0) {
-    	// var payload = {
-    	// 	"username": this.state.username,
-    	// 	"password": this.state.password }
-		// const body = JSON.stringify(payload)
-  // 			return fetch(apiBaseUrl, payload)
-		// 	    .then((res) => {
-		// 	      console.log(res);
-		// 	      if (res.data.code == 200) {
-		// 	      	var loginscreen = [];
-		// 	      	loginscreen.push(<LoginForm parentContext={this}/>)
-		// 	      	var loginmessage = "Not Registered yet.Go to registration";
-		// 	      	self.props.parentContext.setState({loginscreen:loginscreen,
-  //      				loginmessage:loginmessage,
-  //     				buttonLabel:"Register",
-  //      				isLogin:true
-		// 	      })
-  //   		}
-		// })
-		//     	.catch(function (error) {
-		//     		console.log(error)
-	 //    	})
-  //   	}
 
+	handleEmailChange = (event) => {
+		this.setState({
+			email:event.target.value
+		})
+	}
 
-
-  	handleUsernameChange = (event) => {
+  handleNameChange = (event) => {
     	this.setState({
-        username: event.target.value
+        name: event.target.value
     })
 
   }
@@ -101,6 +90,13 @@ class SignUp extends React.Component {
 	    height: event.target.value
     })
   }
+	handleImage = (event) => {
+	    this.setState({
+	    image_url: event.target.value
+    })
+  }
+
+
 
 	render() {
 		return(
@@ -112,6 +108,11 @@ class SignUp extends React.Component {
 							hintText="Type in your Email"
 							floatingLabelText="Type in your Email"
 							onChange={this.handleEmailChange} value={this.state.email} />
+							<br />
+						<TextField
+							hintText="Type in your Name"
+							floatingLabelText="Type in your Name"
+							onChange={this.handleNameChange} value={this.state.name} />
 							<br />
 						<TextField
 							type="password"
@@ -153,4 +154,4 @@ margin: 15,
 
 }
 
-export default SignUp
+export default SignUp;

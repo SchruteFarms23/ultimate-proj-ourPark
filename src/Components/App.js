@@ -3,10 +3,10 @@ import { Route } from 'react-router-dom';
 import '../App.css';
 import MapComponent from './MapComponent'
 import LoginForm  from './LoginForm';
-import Home from './Home'
+import Home from './Home';
 import Navbar from './Navbar';
-import { GoogleApiWrapper } from 'google-maps-react'
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
+import SignUp from './SignUp';
 
 export default class App extends Component {
 
@@ -18,6 +18,8 @@ export default class App extends Component {
       <div className="App">
         <Navbar />
         <Route exact path="/" render={(props)=><Home {...props}/>}/>
+        <Route exact path="/signup" render={(props)=><SignUp {...props}/>}/>
+        <Route exact path="/login" render={(props)=><LoginForm {...props}/>}/>
       </div>
     );
   }
