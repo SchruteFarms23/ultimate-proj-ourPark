@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export default class Navbar extends React.Component {
   render(){
-    if(localStorage.getItem("jwt")){
+    if(!localStorage.getItem("jwt")){
     return(
       <div className="ui blue header menu">
 

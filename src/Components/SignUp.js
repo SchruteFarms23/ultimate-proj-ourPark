@@ -2,7 +2,9 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-// import LoginForm from './LoginForm'
+import { signUp } from '../Actions/user'
+import { connect } from 'react-redux'
+
 
 
 class SignUp extends React.Component {
@@ -20,35 +22,17 @@ class SignUp extends React.Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault()
-		// console.log("hi")
-		// console.log(this.state.username)
-		// console.log(this.state.password)
-		if(this.state.password === this.state.passwordConfirm){
 		const signupParams = {
-    		email: this.state.email,
-				name:this.state.name,
-    		password: this.state.password,
-				weight:this.state.weight,
-				height:this.state.height,
-				image_url:this.state.image_url
-			}
-    	const body= JSON.stringify(signupParams)
-    	return fetch("http://localhost:3000/users",{
-    		method: 'post',
-   			 body: body,
-    		headers: {
-      		"Accept":"application/json",
-      		"Content-Type":"application/json"
-    	}
-  		})
-    	.then((res) => {
-				console.log(res)
-      	return res.json()})
-      	.then((user) => {
-					console.log(user)
-			localStorage.setItem("jwtToken", user.jwt)
-			})
-    	.then((res) => this.props.history.push('/'))
+		    email: this.state.email,
+		    name:this.state.name,
+		    password: this.state.password,
+		    weight:this.state.weight,
+		    height:this.state.height,
+		    image_url:this.state.image_url
+		  }
+		if(this.state.password === this.state.passwordConfirm){
+			this.props.signIn(signupParams,this.props)
+    	// .then((res) => this.props.history.push('/'))
 		}else{
 			alert("Passwords do not match")
 		}
@@ -149,9 +133,17 @@ class SignUp extends React.Component {
 	}
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    signIn: (user,props) => {
+      dispatch(signUp(user,props))
+    }
+  }
+}
+
 const style = {
 margin: 15,
 
 }
 
-export default SignUp;
+export default connect(null, mapDispatchToProps)(SignUp)
