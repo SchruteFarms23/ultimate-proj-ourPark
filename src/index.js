@@ -9,11 +9,18 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import registerServiceWorker from './registerServiceWorker';
 import userReducer from './Reducers/userReducer'
+import {autoRehydrate, persistStore } from 'redux-persist';
 
 const rootReducers= combineReducers({
   user: userReducer
 })
-const store = createStore(rootReducers, composeWithDevTools(applyMiddleware(thunk)))
+const store = createStore(rootReducers, composeWithDevTools(
+  applyMiddleware(thunk),
+  autoRehydrate()
+  )
+)
+
+persistStore(store)
 
 ReactDOM.render(<Provider store={store} ><Router><App /></Router></Provider>, document.getElementById('root'));
 registerServiceWorker();

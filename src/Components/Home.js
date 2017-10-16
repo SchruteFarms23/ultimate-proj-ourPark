@@ -21,13 +21,17 @@ import { GoogleApiWrapper } from 'google-maps-react'
   }
 
   render(){
+    console.log('props inside of home component', this.props)
     return(
+      <div>
+      <Navbar />
       <div className="ui grid">
-      
-        <div className="two wide column"><LoginForm /></div>
+
+        <div className="two wide column"><LoginForm {...this.props} /></div>
 
 
-        <div className="two wide column">  <MapComponent google={this.props.google} parks={this.state.parks} /></div>
+        <div className="two wide column">  <MapComponent google={this.props.google} parks={this.state.parks} history ={this.props.history} /></div>
+      </div>
       </div>
     )
   }

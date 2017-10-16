@@ -1,6 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import Navbar from './Navbar';
 import TextField from 'material-ui/TextField';
 import { signUp } from '../Actions/user'
 import { connect } from 'react-redux'
@@ -31,7 +32,7 @@ class SignUp extends React.Component {
 		    image_url:this.state.image_url
 		  }
 		if(this.state.password === this.state.passwordConfirm){
-			this.props.signIn(signupParams,this.props)
+			this.props.signUp(signupParams,this.props)
     	// .then((res) => this.props.history.push('/'))
 		}else{
 			alert("Passwords do not match")
@@ -85,6 +86,8 @@ class SignUp extends React.Component {
 	render() {
 		return(
 			<div>
+			<Navbar />
+			<div>
 				<MuiThemeProvider>
 					<div>
 					<ul>
@@ -129,13 +132,14 @@ class SignUp extends React.Component {
 					</div>
 				</MuiThemeProvider>
 			</div>
+			</div>
 		)
 	}
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    signIn: (user,props) => {
+    signUp: (user,props) => {
       dispatch(signUp(user,props))
     }
   }

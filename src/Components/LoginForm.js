@@ -2,6 +2,9 @@ import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Navbar from './Navbar';
+import { connect } from 'react-redux'
+import {logIn} from '../Actions/user'
 
 
 
@@ -22,11 +25,14 @@ state = {
     // clear fields
     const loginParams = {   email:this.state.email, password: this.state.password}
 
-    this.props.onLogin(loginParams)
-    this.setState({
-      email: "",
-      password: ""
-    })
+    if(this.state.email.length > 0 && this.state.password.length > 0){
+      console.log(this.props)
+      this.props.logIn(loginParams, this.props)
+    }
+    // this.setState({
+    //   email: "",
+    //   password: ""
+    // })
 
   }
 
@@ -49,6 +55,8 @@ state = {
     // ARE WE LOGGED IN
       return (
         <div>
+        <Navbar />
+        <div>
           <MuiThemeProvider>
             <div>
             <ul>
@@ -68,6 +76,7 @@ state = {
           </div>
          </MuiThemeProvider>
       </div>
+      </div>
 
       )
     }
@@ -78,4 +87,12 @@ margin: 15,
 
 }
 
-export default LoginForm
+function mapDispatchToProps(dispatch) {
+  return {
+    logIn: (user,props) => {
+      dispatch(logIn(user,props))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginForm)

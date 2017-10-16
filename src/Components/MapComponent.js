@@ -1,13 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import MapInfoWindow from './MapInfoWindow'
+import { addPark } from '../Actions/user'
 import { connect } from 'react-redux'
 
 
-export default class MapComponent extends React.Component {
+class MapComponent extends React.Component {
 
   doCheckIn = (parkId) =>{
+    console.log(Object.keys(this.props.user).length === 0 )
+    if(this.props.user && this.props.user.park_id === null){
     console.log(parkId,"tried to check in")
+    console.log(this.props.user)
+    console.log(this.props.user_id)
+    const params = {
+      user_id: this.props.user_id,
+      park_id: parkId
+    }
+    this.props.addPark(params)
+  } else if(Object.keys(this.props.user).length !== 0 && this.props.user.park_id !== null){
+    alert ("You are already checked in to a park.")
+  } else if(Object.keys(this.props.user).length === 0){
+    console.log("hitting")
+    this.props.history.push('/login')
+  }
     //Do a fetch here that assigns a user to a park
     //Then redirect to Park Page
   }
@@ -101,3 +117,20 @@ export default class MapComponent extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state){
+  return {
+    user: state.user.user,
+    user_id: state.user.user_id
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    addPark: (user) => {
+      dispatch(addPark(user))
+  }
+ }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);

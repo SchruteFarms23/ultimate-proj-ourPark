@@ -13,8 +13,15 @@ export function setUser(user){
 
 }
 
+export function logOut(){
+  return {
+    type: "LOGGED_OUT"
+  }
+}
 
+function addParkToUser(user){
 
+}
 
 export function signUp(user,props){
   return function(dispatch){
@@ -40,6 +47,44 @@ export function signUp(user,props){
   }
 }
 
-// export function logIn(){
-//
-// }
+export function logIn(params,props){
+  console.log("Inside of logIn action", props)
+  return function(dispatch){
+    const body= JSON.stringify(params)
+    return fetch("http://localhost:3000/login",{
+      method: 'post',
+       body: body,
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json"
+    }
+    })
+    .then((res) => {
+      // console.log(res)
+      return res.json()})
+      .then((user) => {
+        localStorage.setItem("jwtToken", user.jwt)
+        dispatch(setUser(user.user))
+      })
+      .then((res) => props.history.push('/me'))
+    }
+}
+
+export function addPark(params){
+  return function(dispatch){
+    const body= JSON.stringify(params)
+    return fetch("http://localhost:3000/users/add",{
+      method: 'PATCH',
+       body: body,
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json"
+    }
+  })
+  .then((res) =>{
+    return res.json()})
+  .then((user) => {
+    dispatch(setUser(user.user))
+  })
+  }
+}
