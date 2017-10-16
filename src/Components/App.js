@@ -11,9 +11,7 @@ import SignUp from './SignUp';
 
 
 export default class App extends Component {
-  state={
-    isLoggedin: false
-  }
+
 
 
 
@@ -21,7 +19,7 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        
+
         <Route exact path="/" render={(props)=><Home {...props}/>}/>
         <Route exact path="/signup" render={(props)=><SignUp {...props}/>}/>
         <Route exact path="/login" render={(props)=><LoginForm {...props}/>}/>
@@ -39,3 +37,6 @@ export default class App extends Component {
 
 
 // 'AIzaSyC9a3aSF0IZbzVYpu5689hQb9FzsiDNtuo'
+
+
+// <Route exact path="/logout" component={Logout} />

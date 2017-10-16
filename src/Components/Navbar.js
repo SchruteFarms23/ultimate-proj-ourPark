@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logOut } from '../Actions/user'
 
@@ -9,19 +9,20 @@ class Navbar extends React.Component {
     localStorage.removeItem("jwtToken");
     this.props.logOut()
     localStorage.removeItem("reduxPersist:user");
+    this.forceUpdate()
+
+
 
   }
 
   render(){
-    if(!localStorage.getItem("jwtToken")){
+    const hasToken = !!localStorage.getItem("jwtToken")
+    if(hasToken === false){
     return(
       <div className="ui blue header menu">
 
 	        <NavLink activeClassName="active" className="item" to="/">Home</NavLink>
 	        <NavLink activeClassName="active" className="item right" to="/signUp">Sign Up</NavLink>
-	        <NavLink activeClassName="active" className="item right" to="/login">Log In</NavLink>
-	        <NavLink activeClassName="active" className="item left" to="/me">My Profile</NavLink>
-          <NavLink onClick={this.logout} activeClassName="active" className="item right" to="/">Logout</NavLink>
 
      	 </div>
     )
@@ -31,7 +32,7 @@ class Navbar extends React.Component {
 
 	        <NavLink activeClassName="active" className="item" to="/">Home</NavLink>
           <NavLink activeClassName="active" className="item left" to="/me">My Profile</NavLink>
-          <NavLink onClick={this.logout} activeClassName="active" className="item right" to="/login">Logout</NavLink>
+          <NavLink onClick={this.logout} activeClassName="active" className="item right" to="/">Logout</NavLink>
 
 
      	 </div>

@@ -54,8 +54,7 @@ state = {
     // console.log("RENDERING")
     // ARE WE LOGGED IN
       return (
-        <div>
-        <Navbar />
+
         <div>
           <MuiThemeProvider>
             <div>
@@ -76,7 +75,7 @@ state = {
           </div>
          </MuiThemeProvider>
       </div>
-      </div>
+      
 
       )
     }
