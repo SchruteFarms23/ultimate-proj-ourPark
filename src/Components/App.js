@@ -19,7 +19,7 @@ export default class App extends Component {
 
     return (
       <div className="App">
-
+        
         <Route exact path="/" render={(props)=><Home {...props}/>}/>
         <Route exact path="/signup" render={(props)=><SignUp {...props}/>}/>
         <Route exact path="/login" render={(props)=><LoginForm {...props}/>}/>

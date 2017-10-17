@@ -7,6 +7,54 @@ import { connect } from 'react-redux'
 
 class MapComponent extends React.Component {
 
+  state = {
+    currentLocation: {
+      lat: 49.8527,
+      lng: -123.1207
+    }
+  }
+
+
+  getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                this.setState({
+                        currentLocation: {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        }
+                    }
+                );
+            })
+        } else {
+            this.setState({
+                    currentLocation: {
+                        lat: 49.8527,
+                        lng: -123.1207
+                    }
+                }
+            );
+        }
+    }
+
+  componentDidMount() {
+      this.getLocation()
+
+    }
+
+    recenterMap() {
+    const map = this.map;
+    const curr = this.state.currentLocation;
+
+    const google = this.props.google;
+    const maps = google.maps;
+
+    if (map) {
+        let center = new maps.LatLng(curr.lat, curr.lng)
+        map.panTo(center)
+    }
+  }
+
   doCheckIn = (parkId) =>{
     console.log(Object.keys(this.props.user).length === 0 )
     if(this.props.user && this.props.user.park_id === null){
@@ -37,6 +85,9 @@ class MapComponent extends React.Component {
       console.log("is working")
       this.loadMap();
     }
+    if (prevState.currentLocation !== this.state.currentLocation) {
+      this.recenterMap();
+    }
   }
 
   loadMap() {
@@ -46,9 +97,10 @@ class MapComponent extends React.Component {
       const maps = google.maps;
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
-      let zoom = 14;
-      let lng = -73.9712;
-      let lat = 40.7831;
+      let zoom = 18;
+      let lng = this.state.currentLocation.lng;
+      let lat = this.state.currentLocation.lat;
+      // var geoloccontrol = new klokantech.GeolocationControl(mapRef, mapMaxZoom);
       const center = new maps.LatLng(lat, lng);
       const mapConfig = Object.assign({}, {
         center: center,
@@ -132,5 +184,21 @@ function mapDispatchToProps(dispatch){
   }
  }
 }
+
+// Map.propTypes = {
+//   google: React.PropTypes.object,
+//   zoom: React.PropTypes.number,
+//   initialCenter: React.PropTypes.object,
+//   centerAroundCurrentLocation: React.PropTypes.bool
+// }
+// Map.defaultProps = {
+//   zoom: 13,
+//   // San Francisco, by default
+//   initialCenter: {
+//     lat: 37.774929,
+//     lng: -122.419416
+//   },
+//   centerAroundCurrentLocation: false
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
