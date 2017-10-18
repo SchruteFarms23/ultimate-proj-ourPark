@@ -51,7 +51,6 @@ class MapComponent extends React.Component {
 
   componentDidMount() {
       this.getLocation()
-
     }
 
     recenterMap() {
@@ -112,6 +111,7 @@ class MapComponent extends React.Component {
     if (prevState.currentLocation !== this.state.currentLocation) {
       this.recenterMap();
     }
+    
   }
 
   loadMap() {

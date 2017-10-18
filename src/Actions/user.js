@@ -6,8 +6,17 @@ export function fetchingAccount(){
 }
 
 export function setUser(user){
+  console.log(user)
   return {
     type:"SET_USER",
+    payload: user
+  }
+
+}
+export function checkedOut(user){
+  console.log(user)
+  return {
+    type:"CHECKED_OUT",
     payload: user
   }
 
@@ -84,6 +93,26 @@ export function addPark(params){
   .then((res) =>{
     return res.json()})
   .then((user) => {
+    dispatch(setUser(user.user))
+  })
+  }
+}
+
+export function checkOut(params){
+  return function(dispatch){
+    const body= JSON.stringify(params)
+    return fetch("http://localhost:3000/users/delete",{
+      method: 'DELETE',
+       body: body,
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json"
+    }
+  })
+  .then((res) =>{
+    return res.json()})
+  .then((user) => {
+    console.log(user)
     dispatch(setUser(user.user))
   })
   }

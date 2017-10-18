@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { addPark } from '../Actions/user'
+import { addPark,checkOut } from '../Actions/user'
 
 class MarkerModal extends React.Component {
 
@@ -29,7 +29,23 @@ class MarkerModal extends React.Component {
   }
   }
 
+  doCheckOut = () => {
+    console.log(this.props.user_id)
+    const parkId = this.props.park.id
+    if(this.props.user && this.props.user.park_id !== null){
+      const params = {
+        user_id: this.props.user_id,
+        park_id: parkId
+      }
+      this.props.checkOut(params)
+      this.setState({
+        visable: !this.state.visable
+      })
+    }
+  }
+
   render(){
+    console.log("Rendering Marker Modal",this.props)
     if(this.props.visible){
       console.log(this.props)
       console.log("visible")
@@ -50,7 +66,7 @@ class MarkerModal extends React.Component {
     </div>
   </div>
   <div className="actions">
-    <div className="ui black deny button">
+    <div className="ui black deny button" onClick={this.doCheckOut}>
       Check Me Out
     </div>
     <div className="ui positive right labeled icon button" onClick={this.doCheckIn}>
@@ -82,6 +98,9 @@ function mapDispatchToProps(dispatch){
   return{
     addPark: (user) => {
       dispatch(addPark(user))
+  },
+  checkOut: (user) => {
+    dispatch(checkOut(user))
   }
  }
 }
