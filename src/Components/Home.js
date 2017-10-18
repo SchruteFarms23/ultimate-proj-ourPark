@@ -8,12 +8,14 @@ import UserCardHome from './UserCardHome';
 
 
 
+
  class Home extends Component{
   state={
     parks:[]
   }
 
   componentDidMount(){
+    console.log("In componentDidMount")
 		fetch('http://localhost:3000/parks')
 		.then(res => res.json())
 		.then(res => this.setState({

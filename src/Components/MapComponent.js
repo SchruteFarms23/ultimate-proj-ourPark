@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import MapInfoWindow from './MapInfoWindow'
 import { addPark } from '../Actions/user'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+// import DialogExampleScrollable from './MapWindowModal'
 
 
 class MapComponent extends React.Component {
@@ -12,6 +13,10 @@ class MapComponent extends React.Component {
       lat: 49.8527,
       lng: -123.1207
     }
+  }
+
+  openModal = ()=> {
+    console.log("modal opened")
   }
 
 
@@ -66,6 +71,7 @@ class MapComponent extends React.Component {
       park_id: parkId
     }
     this.props.addPark(params)
+    this.props.history.push('/parks/' + parkId)
   } else if(Object.keys(this.props.user).length !== 0 && this.props.user.park_id !== null){
     alert ("You are already checked in to a park.")
   } else if(Object.keys(this.props.user).length === 0){
@@ -76,12 +82,23 @@ class MapComponent extends React.Component {
     //Then redirect to Park Page
   }
 
+  doCheckOut = (parkId) =>{
+    if(this.props.user && this.props.user.park_id !== null){
+      const params = {
+        user_id: this.props.user_id,
+        park_id: parkId
+      }
+      this.props.checkOut(params)
+
+    }
+  }
+
 
 
   componentDidUpdate(prevProps, prevState) {
     console.log(prevProps)
     console.log(prevState)
-    if (prevProps.google !== this.props.google || prevProps.parks !== this.props.parks) {
+    if (prevProps.google !== this.props.google || prevProps.parks !== this.props.parks || prevProps.user.park_id !== this.props.user.park_id) {
       console.log("is working")
       this.loadMap();
     }
@@ -92,6 +109,7 @@ class MapComponent extends React.Component {
 
   loadMap() {
     if (this.props && this.props.google) {
+
       console.log("also working")
       const {google} = this.props;
       const maps = google.maps;
@@ -108,14 +126,17 @@ class MapComponent extends React.Component {
       })
       this.map = new maps.Map(node, mapConfig);
 
+      console.log("this.props.parks inside of mapComponent", console.log(this.props.parks))
+//map start
       this.props.parks.map( (park) => {
       const marker = new google.maps.Marker({
           position: {lat: park.lat , lng: park.long },
           map: this.map,
           title: park.name
         });
-        if (park.users.length > 0){
-          var users = park.users.map(user => `<li>${user.name}</li>`).join('')
+        let users
+        if ( park.users){
+           users = park.users.map(user => `<li>${user.name}</li>`).join('')
 
         }else{
           users = "No one is in the park."
@@ -123,6 +144,8 @@ class MapComponent extends React.Component {
         // console.log(this.doCheckIn)
 
         const checkin = `<button id = "checkin">Check In!</button>`
+        const checkout = `<button id = "checkout">Check Out!</button>`
+
 
         var content = `<div id="iw-container">` +
                    `<div class="iw-title">${park.name}</div>` +
@@ -130,11 +153,13 @@ class MapComponent extends React.Component {
                      `<img src="https://i.pinimg.com/736x/85/ee/0d/85ee0d3d32c5a4c46748a2f5c12a01b1--basketball-clipart-girls-basketball.jpg"  height="115" width="100">` +
                      users +
                      checkin +
+                     checkout +
                  `</div>`
                  ;
       var infowindow = new google.maps.InfoWindow({
           content: content
         });
+
 
         let that = this
 
@@ -146,11 +171,24 @@ class MapComponent extends React.Component {
 
     });
     });
+        google.maps.event.addListener(infowindow, 'domready', function() {
+    document.getElementById("checkout").addEventListener("click", function(){
+      console.log(park.id)
+      that.doCheckOut(park.id);
+
+
+    });
+    });
 
         marker.addListener('click', function() {
-          infowindow.open(this.map, marker);
+          /// we need it to open the specific marker and show the things associated with it
+          ///
+          // infowindow.open(this.map, marker);
+          that.openModal()
         });
       })
+      //end mapping
+
     }
   }
 
@@ -159,13 +197,14 @@ class MapComponent extends React.Component {
   render() {
     const style = {
       width: '85vw',
-      height: '75vh'
+      height: '81vh'
     }
-
+    console.log(this.props)
     return (
       <div ref='map' style={style}>
         Loading map...
       </div>
+
     )
   }
 }
@@ -201,4 +240,4 @@ function mapDispatchToProps(dispatch){
 //   centerAroundCurrentLocation: false
 // }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MapComponent));

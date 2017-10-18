@@ -6,7 +6,7 @@ class UserCardHome extends React.Component{
     return(
       <div className="ui card">
     <div className="image">
-      <img src="/images/avatar2/large/kristy.png"/>
+      <img src={this.props.user.image_url}/>
     </div>
     <div className="content">
       <a className="header">{this.props.user.name}</a>
