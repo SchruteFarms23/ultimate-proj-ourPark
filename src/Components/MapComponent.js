@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { addPark } from '../Actions/user'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-// import DialogExampleScrollable from './MapWindowModal'
+import MarkerModal from './MarkerModal'
 
 
 class MapComponent extends React.Component {
@@ -12,12 +12,19 @@ class MapComponent extends React.Component {
     currentLocation: {
       lat: 49.8527,
       lng: -123.1207
-    }
+    },
+    modalOpen: false,
+    currentPark: {}
   }
 
-  openModal = ()=> {
-    console.log("modal opened")
+  openModal = (park)=> {
+    console.log(park)
+    this.setState({
+      modalOpen: !this.state.modalOpen,
+      currentPark: park
+    })
   }
+
 
 
   getLocation() {
@@ -96,8 +103,8 @@ class MapComponent extends React.Component {
 
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps)
-    console.log(prevState)
+    // console.log(prevProps)
+    // console.log(prevState)
     if (prevProps.google !== this.props.google || prevProps.parks !== this.props.parks || prevProps.user.park_id !== this.props.user.park_id) {
       console.log("is working")
       this.loadMap();
@@ -146,45 +153,14 @@ class MapComponent extends React.Component {
         const checkin = `<button id = "checkin">Check In!</button>`
         const checkout = `<button id = "checkout">Check Out!</button>`
 
-
-        var content = `<div id="iw-container">` +
-                   `<div class="iw-title">${park.name}</div>` +
-                   `<div class="iw-content">` +
-                     `<img src="https://i.pinimg.com/736x/85/ee/0d/85ee0d3d32c5a4c46748a2f5c12a01b1--basketball-clipart-girls-basketball.jpg"  height="115" width="100">` +
-                     users +
-                     checkin +
-                     checkout +
-                 `</div>`
-                 ;
-      var infowindow = new google.maps.InfoWindow({
-          content: content
-        });
-
-
         let that = this
 
-        google.maps.event.addListener(infowindow, 'domready', function() {
-    document.getElementById("checkin").addEventListener("click", function(){
-      console.log(park.id)
-      that.doCheckIn(park.id);
-
-
-    });
-    });
-        google.maps.event.addListener(infowindow, 'domready', function() {
-    document.getElementById("checkout").addEventListener("click", function(){
-      console.log(park.id)
-      that.doCheckOut(park.id);
-
-
-    });
-    });
 
         marker.addListener('click', function() {
           /// we need it to open the specific marker and show the things associated with it
           ///
           // infowindow.open(this.map, marker);
-          that.openModal()
+          that.openModal(park)
         });
       })
       //end mapping
@@ -199,12 +175,14 @@ class MapComponent extends React.Component {
       width: '85vw',
       height: '81vh'
     }
-    console.log(this.props)
+    console.log(this.state.currentPark.users)
     return (
+      <div>
       <div ref='map' style={style}>
         Loading map...
       </div>
-
+      <MarkerModal park={this.state.currentPark} visible={this.state.modalOpen}/>
+      </div>
     )
   }
 }
@@ -224,20 +202,36 @@ function mapDispatchToProps(dispatch){
  }
 }
 
-// Map.propTypes = {
-//   google: React.PropTypes.object,
-//   zoom: React.PropTypes.number,
-//   initialCenter: React.PropTypes.object,
-//   centerAroundCurrentLocation: React.PropTypes.bool
-// }
-// Map.defaultProps = {
-//   zoom: 13,
-//   // San Francisco, by default
-//   initialCenter: {
-//     lat: 37.774929,
-//     lng: -122.419416
-//   },
-//   centerAroundCurrentLocation: false
-// }
+
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MapComponent));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     google.maps.event.addListener(infowindow, 'domready', function() {
+// document.getElementById("checkin").addEventListener("click", function(){
+//   console.log(park.id)
+//   that.doCheckIn(park.id);
+//
+//
+// });
+// });
+//     google.maps.event.addListener(infowindow, 'domready', function() {
+// document.getElementById("checkout").addEventListener("click", function(){
+//   console.log(park.id)
+//   that.doCheckOut(park.id);
+
+
+// });
+// });

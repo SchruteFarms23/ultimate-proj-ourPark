@@ -1,5 +1,5 @@
 import React from 'react'
-import MapWindowModal from './MapWindowModal'
+
 
 
 export default class ParkPage extends React.Component{
@@ -25,8 +25,7 @@ export default class ParkPage extends React.Component{
   render(){
     return(
       <div>
-      <p>{this.state.park.name}</p>
-      <MapWindowModal />
+      <h1>{this.state.park.name}</h1>
       </div>
 
 

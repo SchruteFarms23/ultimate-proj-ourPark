@@ -20,7 +20,7 @@ export default class PlayerPage extends React.Component{
   }
   render(){
     return(
-      <p>{this.state.player.email}</p>
+      <h1>{this.state.player.name}</h1>
     )
   }
 }

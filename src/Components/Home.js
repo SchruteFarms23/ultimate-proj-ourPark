@@ -43,7 +43,7 @@ import UserCardHome from './UserCardHome';
       <div>
       <Navbar />
       <div className="ui grid">
-
+        
         <div className="two wide column"><UserCardHome {...this.props} /></div>
 
 
