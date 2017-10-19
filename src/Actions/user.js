@@ -28,9 +28,7 @@ export function logOut(){
   }
 }
 
-function addParkToUser(user){
 
-}
 
 export function signUp(user,props){
   return function(dispatch){

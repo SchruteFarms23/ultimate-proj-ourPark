@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { addPark,checkOut } from '../Actions/user'
+import { addUser, removeUser } from '../Actions/map'
+
 
 class MarkerModal extends React.Component {
 
@@ -13,34 +15,34 @@ class MarkerModal extends React.Component {
   }
 
   doCheckIn = () =>{
-    const parkId = this.props.park.id
+    const parkId = this.props.currentPark.id
     if(this.props.user && this.props.user.park_id === null){
     const params = {
       user_id: this.props.user_id,
       park_id: parkId
     }
+    this.props.addUser(this.props.user)
+
     this.props.addPark(params)
-    this.props.history.push('/parks/' + parkId)
+
+    // this.props.history.push('/parks/' + parkId)
   } else if(Object.keys(this.props.user).length !== 0 && this.props.user.park_id !== null){
     alert ("You are already checked in to a park.")
   } else if(Object.keys(this.props.user).length === 0){
     console.log("hitting")
     this.props.history.push('/login')
-  }
+    }
   }
 
   doCheckOut = () => {
-    console.log(this.props.user_id)
-    const parkId = this.props.park.id
+    const parkId = this.props.currentPark.id
     if(this.props.user && this.props.user.park_id !== null){
       const params = {
         user_id: this.props.user_id,
         park_id: parkId
       }
+      this.props.removeUser(this.props.user_id)
       this.props.checkOut(params)
-      this.setState({
-        visable: !this.state.visable
-      })
     }
   }
 
@@ -49,12 +51,13 @@ class MarkerModal extends React.Component {
     if(this.props.visible){
       console.log(this.props)
       console.log("visible")
-      const users = this.props.park.users.map(user => <li key={user.id}>{user.name}</li>)
+      console.log("rendering")
+      const users = this.props.currentPark.users.map(user => <li key={user.id}>{user.name}</li>)
       return(
         <div className="ui active modal">
   <i className="close icon"></i>
   <div className="header">
-    {this.props.park.name}
+    {this.props.currentPark.name}
   </div>
   <div className="image content">
     <div className="ui medium image">
@@ -88,19 +91,28 @@ class MarkerModal extends React.Component {
 }
 
 function mapStateToProps(state){
+  console.log(state)
   return {
     user: state.user.user,
-    user_id: state.user.user_id
+    user_id: state.user.user_id,
+    currentPark: state.maps.currentPark
   }
 }
 
 function mapDispatchToProps(dispatch){
   return{
-    addPark: (user) => {
-      dispatch(addPark(user))
+    addPark: (park) => {
+      dispatch(addPark(park))
   },
   checkOut: (user) => {
     dispatch(checkOut(user))
+  },
+  addUser: (user) => {
+    console.log(user)
+    dispatch(addUser(user))
+  },
+  removeUser: (user) => {
+    dispatch(removeUser(user))
   }
  }
 }

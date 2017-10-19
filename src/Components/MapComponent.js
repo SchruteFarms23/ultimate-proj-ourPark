@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { addPark } from '../Actions/user'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { addCurrentPark } from '../Actions/map'
 import MarkerModal from './MarkerModal'
 
 
@@ -13,15 +13,14 @@ class MapComponent extends React.Component {
       lat: 49.8527,
       lng: -123.1207
     },
-    modalOpen: false,
-    currentPark: {}
+    modalOpen: false
   }
 
   openModal = (park)=> {
-    console.log(park)
+    this.props.addCurrentPark(park)
+
     this.setState({
-      modalOpen: !this.state.modalOpen,
-      currentPark: park
+      modalOpen: !this.state.modalOpen
     })
   }
 
@@ -66,38 +65,6 @@ class MapComponent extends React.Component {
     }
   }
 
-  doCheckIn = (parkId) =>{
-    console.log(Object.keys(this.props.user).length === 0 )
-    if(this.props.user && this.props.user.park_id === null){
-    console.log(parkId,"tried to check in")
-    console.log(this.props.user)
-    console.log(this.props.user_id)
-    const params = {
-      user_id: this.props.user_id,
-      park_id: parkId
-    }
-    this.props.addPark(params)
-    this.props.history.push('/parks/' + parkId)
-  } else if(Object.keys(this.props.user).length !== 0 && this.props.user.park_id !== null){
-    alert ("You are already checked in to a park.")
-  } else if(Object.keys(this.props.user).length === 0){
-    console.log("hitting")
-    this.props.history.push('/login')
-  }
-    //Do a fetch here that assigns a user to a park
-    //Then redirect to Park Page
-  }
-
-  doCheckOut = (parkId) =>{
-    if(this.props.user && this.props.user.park_id !== null){
-      const params = {
-        user_id: this.props.user_id,
-        park_id: parkId
-      }
-      this.props.checkOut(params)
-
-    }
-  }
 
 
 
@@ -111,7 +78,7 @@ class MapComponent extends React.Component {
     if (prevState.currentLocation !== this.state.currentLocation) {
       this.recenterMap();
     }
-    
+
   }
 
   loadMap() {
@@ -175,13 +142,13 @@ class MapComponent extends React.Component {
       width: '85vw',
       height: '81vh'
     }
-    console.log(this.state.currentPark.users)
+
     return (
       <div>
       <div ref='map' style={style}>
         Loading map...
       </div>
-      <MarkerModal park={this.state.currentPark} visible={this.state.modalOpen}/>
+      <MarkerModal visible={this.state.modalOpen}/>
       </div>
     )
   }
@@ -196,8 +163,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return{
-    addPark: (user) => {
-      dispatch(addPark(user))
+    addCurrentPark: (park) => {
+      dispatch(addCurrentPark(park))
   }
  }
 }

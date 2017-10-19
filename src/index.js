@@ -9,10 +9,12 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import registerServiceWorker from './registerServiceWorker';
 import userReducer from './Reducers/userReducer'
+import mapsReducer from './Reducers/mapsReducer'
 import {autoRehydrate, persistStore } from 'redux-persist';
 
 const rootReducers= combineReducers({
-  user: userReducer
+  user: userReducer,
+  maps: mapsReducer
 })
 const store = createStore(rootReducers, composeWithDevTools(
   applyMiddleware(thunk),
