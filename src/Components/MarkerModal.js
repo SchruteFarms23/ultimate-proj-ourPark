@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { addPark,checkOut } from '../Actions/user'
 import { addUser, removeUser } from '../Actions/map'
 
@@ -25,7 +25,7 @@ class MarkerModal extends React.Component {
 
     this.props.addPark(params)
 
-    // this.props.history.push('/parks/' + parkId)
+    this.props.history.push('/parks/' + parkId)
   } else if(Object.keys(this.props.user).length !== 0 && this.props.user.park_id !== null){
     alert ("You are already checked in to a park.")
   } else if(Object.keys(this.props.user).length === 0){

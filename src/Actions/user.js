@@ -68,14 +68,26 @@ export function logIn(params,props){
     })
     .then((res) => {
       // console.log(res)
-      return res.json()})
+      return res.json()
+    })
       .then((user) => {
+        if(user.user){
         localStorage.setItem("jwtToken", user.jwt)
         dispatch(setUser(user.user))
+      }else{
+        return null
+      }
       })
-      .then((res) => props.history.push('/me'))
+      .then((res) => {
+        console.log(res)
+        if(res !== null){
+         props.history.push('/me')
+       }else{
+         props.history.push('/')
+       }
+     })
     }
-}
+  }
 
 export function addPark(params){
   return function(dispatch){

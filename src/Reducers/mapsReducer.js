@@ -1,4 +1,4 @@
-export default function mapsReducer(state={currentPark:{}},action){
+export default function mapsReducer(state={currentPark:{}} ,action){
   switch (action.type){
     case "ADD_CURRENT_PARK":
       return Object.assign({},state,{currentPark:action.payload})
