@@ -82,3 +82,20 @@ export function createGame(params){
     .then(dispatch(fetchPendingGames(params)))
   }
 }
+
+export function addUserToTeam(params){
+  return function(dispatch){
+    const body= JSON.stringify(params)
+
+    return fetch("http://localhost:3000/teams/adduser",{
+      method: 'post',
+      body: body,
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json"
+    }
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
+  }
+}
