@@ -42,7 +42,7 @@ import PendingGamesContainer from './PendingGamesContainer'
 
         <div className="six wide column"> {this.props.currentPark.id? <ActiveGamesContainer park_id={this.props.currentPark.id} /> : null }</div>
 
-        <div className="five wide column"> {this.props.currentPark.id? <PendingGamesContainer park_id={this.props.currentPark.id} /> : null }  </div>
+        <div className="five wide column"> {this.props.currentPark.id? <PendingGamesContainer park_id={this.props.currentPark.id} history={this.props.history} /> : null }  </div>
       </div>
       </div>
 

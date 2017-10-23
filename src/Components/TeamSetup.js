@@ -16,14 +16,12 @@ class TeamSetup extends React.Component{
   // }
 
   addUserToTeam = (teamId) => {
-    console.log(teamId, this.props.user_id)
     const params = {team_id:teamId, user_id:this.props.user_id }
 
-    this.props.addUserToTeam(params)
+    this.props.addUserToTeam(params,this.props.gameId)
   }
 
   render(){
-    console.log(this.props)
     if(this.props.teamOne){
     return(
     <div>
@@ -34,7 +32,6 @@ class TeamSetup extends React.Component{
     </div>
   )
 }else{
-  console.log(this.props)
   return(
   <div>
   <div> <p>Team Two</p> </div>
@@ -58,8 +55,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch) {
 
   return {
-    addUserToTeam: (team) => {
-      dispatch(addUserToTeam(team))
+    addUserToTeam: (params,gameId) => {
+      dispatch(addUserToTeam(params,gameId))
     }
   }
 }

@@ -72,7 +72,6 @@ class MapComponent extends React.Component {
     // console.log(prevProps)
     // console.log(prevState)
     if (prevProps.google !== this.props.google || prevProps.parks !== this.props.parks || prevProps.user.park_id !== this.props.user.park_id) {
-      console.log("is working")
       this.loadMap();
     }
     if (prevState.currentLocation !== this.state.currentLocation) {
@@ -83,8 +82,6 @@ class MapComponent extends React.Component {
 
   loadMap() {
     if (this.props && this.props.google) {
-
-      console.log("also working")
       const {google} = this.props;
       const maps = google.maps;
       const mapRef = this.refs.map;
@@ -100,7 +97,6 @@ class MapComponent extends React.Component {
       })
       this.map = new maps.Map(node, mapConfig);
 
-      console.log("this.props.parks inside of mapComponent", console.log(this.props.parks))
 //map start
       this.props.parks.map( (park) => {
       const marker = new google.maps.Marker({

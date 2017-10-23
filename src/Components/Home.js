@@ -15,7 +15,6 @@ import UserCardHome from './UserCardHome';
   }
 
   componentDidMount(){
-    console.log("In componentDidMount")
 		fetch('http://localhost:3000/parks')
 		.then(res => res.json())
 		.then(res => this.setState({
@@ -24,7 +23,6 @@ import UserCardHome from './UserCardHome';
   }
 
   render(){
-    console.log('props inside of home component', this.props)
     if(!localStorage.getItem("jwtToken")){
     return(
       <div>
@@ -43,7 +41,7 @@ import UserCardHome from './UserCardHome';
       <div>
       <Navbar />
       <div className="ui grid">
-        
+
         <div className="two wide column"><UserCardHome {...this.props} /></div>
 
 

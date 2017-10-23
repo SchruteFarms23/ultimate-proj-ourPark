@@ -9,9 +9,6 @@ class ParkPlayersColumn extends React.Component{
 
   render(){
     this.props.players
-    console.log(this.props.currentPark)
-    console.log(this.state)
-
     if(this.props.currentPark.users){
       const mappedPlayers = this.props.currentPark.users.map(player => <PlayerItem key={player.id} player={player} />)
     return(
@@ -31,7 +28,6 @@ class ParkPlayersColumn extends React.Component{
 }
 
 function mapStateToProps(state){
-  console.log(state)
   return {
     user: state.user.user,
     user_id: state.user.user_id,

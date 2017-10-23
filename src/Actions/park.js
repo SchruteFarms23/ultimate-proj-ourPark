@@ -23,6 +23,13 @@ export function currentTeam(team){
   }
 }
 
+export function addUser(user,gameId,teamId){
+  return {
+    type: "ADD_USER_TO_TEAM",
+    payload: {user,gameId,teamId}
+  }
+}
+
 export function fetchCurrentTeam(id){
   return function(dispatch){
     const url= "http://localhost:3000/teams/"
@@ -83,7 +90,7 @@ export function createGame(params){
   }
 }
 
-export function addUserToTeam(params){
+export function addUserToTeam(params,gameId){
   return function(dispatch){
     const body= JSON.stringify(params)
 
@@ -96,6 +103,13 @@ export function addUserToTeam(params){
     }
     })
     .then(res => res.json())
-    .then(res => console.log(res))
+    .then(user => {
+      if(!user.messages){
+      dispatch(addUser(user,gameId,params.team_id))
+    }else{
+      alert("User already belongs to a team")
+    }
+  })
+
   }
 }

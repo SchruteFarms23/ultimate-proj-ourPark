@@ -7,23 +7,20 @@ import PendingGameSetup from './PendingGameSetup'
 class PendingGamesContainer extends React.Component{
 
   componentDidMount(){
-    console.log(this.props)
+
     const params= {park_id:this.props.park_id}
     this.props.fetchPendingGames(params)
   }
 
   createGame=()=>{
-    console.log("hitting")
-    console.log(this.props)
     const params= {park_id:this.props.park_id}
     this.props.createGame(params)
 
   }
 
   render(){
-    console.log("rendering")
     if(this.props.pendingGames.length > 0){
-      const mappedPendingGames = this.props.pendingGames.map(game => <PendingGameSetup key={game.id} game={game}/>)
+      const mappedPendingGames = this.props.pendingGames.map(game => <PendingGameSetup key={game.id} game={game} history={this.props.history}/>)
     return(
       <div>
       <h2> Pending Games </h2>
@@ -48,7 +45,6 @@ class PendingGamesContainer extends React.Component{
 }
 
 function mapStateToProps(state){
-  console.log("mapStateToProps")
 
   return {
     user: state.user.user,

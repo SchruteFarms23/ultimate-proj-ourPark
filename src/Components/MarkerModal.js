@@ -8,7 +8,6 @@ import { addUser, removeUser } from '../Actions/map'
 class MarkerModal extends React.Component {
 
   componentDidMount(){
-    console.log(this.props.visible)
     this.setState({
       visible: this.props.visible
     })
@@ -29,7 +28,6 @@ class MarkerModal extends React.Component {
   } else if(Object.keys(this.props.user).length !== 0 && this.props.user.park_id !== null){
     alert ("You are already checked in to a park.")
   } else if(Object.keys(this.props.user).length === 0){
-    console.log("hitting")
     this.props.history.push('/login')
     }
   }
@@ -47,11 +45,7 @@ class MarkerModal extends React.Component {
   }
 
   render(){
-    console.log("Rendering Marker Modal",this.props)
     if(this.props.visible){
-      console.log(this.props)
-      console.log("visible")
-      console.log("rendering")
       const users = this.props.currentPark.users.map(user => <li key={user.id}>{user.name}</li>)
       return(
         <div className="ui active modal">
@@ -80,8 +74,6 @@ class MarkerModal extends React.Component {
 </div>
       )
     }else {
-      console.log(this.props)
-      console.log("invisible")
       return(
         <div className="ui modal">
         </div>
@@ -91,7 +83,6 @@ class MarkerModal extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state)
   return {
     user: state.user.user,
     user_id: state.user.user_id,
@@ -108,7 +99,6 @@ function mapDispatchToProps(dispatch){
     dispatch(checkOut(user))
   },
   addUser: (user) => {
-    console.log(user)
     dispatch(addUser(user))
   },
   removeUser: (user) => {
