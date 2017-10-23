@@ -22,8 +22,8 @@ class ActiveGamesContainer extends React.Component{
     if(this.props.activeGames.length > 0){
     return(
       <div>
-      <h1>Active Games</h1>
-      <h2>Game {this.props.activeGames[0].id} : {this.props.activeGames[0].score}</h2>
+      <h2>Active Games</h2>
+      <h3>Game {this.props.activeGames[0].id} : {this.props.activeGames[0].score}</h3>
       </div>
     )
   }else{

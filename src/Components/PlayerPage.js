@@ -14,7 +14,7 @@ export default class PlayerPage extends React.Component{
 		.then((player) => {
 			console.log(player)
       this.setState({
-        player: player.player
+        player: player
       })
 
 		})

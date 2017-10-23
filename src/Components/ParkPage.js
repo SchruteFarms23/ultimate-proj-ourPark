@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import { connect } from 'react-redux'
 import ParkPlayersColumn from './ParkPlayersColumn'
 import ActiveGamesContainer from './ActiveGamesContainer'
+import PendingGamesContainer from './PendingGamesContainer'
 
 
 
@@ -23,7 +24,7 @@ import ActiveGamesContainer from './ActiveGamesContainer'
 		.then((park) => {
 			console.log(park)
       this.setState({
-        park: park.park
+        park: park
       })
 
 		})
@@ -41,7 +42,7 @@ import ActiveGamesContainer from './ActiveGamesContainer'
 
         <div className="six wide column"> {this.props.currentPark.id? <ActiveGamesContainer park_id={this.props.currentPark.id} /> : null }</div>
 
-        <div className="five wide column">  </div>
+        <div className="five wide column"> {this.props.currentPark.id? <PendingGamesContainer park_id={this.props.currentPark.id} /> : null }  </div>
       </div>
       </div>
 
@@ -55,10 +56,6 @@ import ActiveGamesContainer from './ActiveGamesContainer'
 }
 
 function mapStateToProps(state){
-  debugger
-
-  // console.log("hitting mapStateToProps")
-
   return {
     user: state.user.user,
     user_id: state.user.user_id,
