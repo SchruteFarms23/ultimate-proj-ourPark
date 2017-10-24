@@ -4,6 +4,8 @@ export default function parkReducer(state={activeGames:[],pendingGames:[]},actio
       return Object.assign({},state,{...state, activeGames:action.payload})
     case "PENDING_GAMES":
       return Object.assign({},state,{...state, pendingGames:action.payload})
+    case "ADD_NEW_GAME":
+      return Object.assign({},state,{pendingGames: [...state.pendingGames,action.payload]})
     case "ADD_USER_TO_TEAM":
     console.log("hitting it", action.payload)
       var gameIdx = state.pendingGames.findIndex(game => game.id === action.payload.gameId) //grab the game index

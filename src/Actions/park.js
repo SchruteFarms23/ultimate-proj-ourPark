@@ -8,6 +8,13 @@ export function activeGames(games){
   }
 }
 
+export function addNewGame(game){
+  return {
+    type: "ADD_NEW_GAME",
+    payload:game
+  }
+}
+
 export function pendingGames(games){
   console.log(games)
   return {
@@ -86,7 +93,8 @@ export function createGame(params){
     }
     })
     .then(res => res.json())
-    .then(dispatch(fetchPendingGames(params)))
+    .then(game => dispatch(addNewGame(game)))
+     //backend sends back new game obj; we update store which re-renders components
   }
 }
 
@@ -110,6 +118,24 @@ export function addUserToTeam(params,gameId){
       alert("User already belongs to a team")
     }
   })
+
+  }
+}
+
+export function startGame(params,props){
+  return function(dispatch){
+    const body= JSON.stringify(params)
+
+    return fetch("http://localhost:3000/games/change",{
+      method: 'post',
+      body: body,
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json"
+    }
+    })
+    .then(res => res.json())
+    .then(res => props.history.push(`/games/${params.game_id}`))
 
   }
 }

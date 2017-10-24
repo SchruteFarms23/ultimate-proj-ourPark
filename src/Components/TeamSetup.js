@@ -5,15 +5,6 @@ import { addUserToTeam } from '../Actions/park'
 
 class TeamSetup extends React.Component{
 
-  // componentDidMount(){
-  //   console.log(this.props)
-  //   if(this.props.teamOne){
-  //   this.props.fetchCurrentTeam(this.props.teamOne.id)
-  // }else{
-  //   this.props.fetchCurrentTeam(this.props.teamTwo.id)
-  // }
-  //   //fetch current team put team in store
-  // }
 
   addUserToTeam = (teamId) => {
     const params = {team_id:teamId, user_id:this.props.user_id }

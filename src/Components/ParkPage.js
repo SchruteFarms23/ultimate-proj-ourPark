@@ -8,28 +8,7 @@ import PendingGamesContainer from './PendingGamesContainer'
 
 
   class ParkPage extends React.Component{
-  state={
-    park: {}
-  }
-
-  componentDidMount(){
-
-    console.log(this.props)
-    console.log("hitting componentDidMount")
-    const parkId = this.props.location.pathname.split('/').pop()
-    const url = "http://localhost:3000/parks/"
-    console.log(url + parkId)
-    fetch(url+parkId)
-    .then((res) => res.json())
-		.then((park) => {
-			console.log(park)
-      this.setState({
-        park: park
-      })
-
-		})
-  }
-
+  
   render(){
 
     return(

@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchActiveGames } from '../Actions/park'
+import ActiveGameSetup from './ActiveGameSetup'
 
 
 class ActiveGamesContainer extends React.Component{
@@ -20,10 +21,11 @@ class ActiveGamesContainer extends React.Component{
     console.log("rendering")
     console.log(this.props)
     if(this.props.activeGames.length > 0){
+      const mappedActiveGames = this.props.activeGames.map(game => <ActiveGameSetup key={game.id} game={game}/>)
     return(
       <div>
       <h2>Active Games</h2>
-      <h3>Game {this.props.activeGames[0].id} : {this.props.activeGames[0].score}</h3>
+      {mappedActiveGames}
       </div>
     )
   }else{

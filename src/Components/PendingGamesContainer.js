@@ -19,13 +19,13 @@ class PendingGamesContainer extends React.Component{
   }
 
   render(){
+    console.log("rendering pending games")
     if(this.props.pendingGames.length > 0){
       const mappedPendingGames = this.props.pendingGames.map(game => <PendingGameSetup key={game.id} game={game} history={this.props.history}/>)
     return(
       <div>
       <h2> Pending Games </h2>
       {mappedPendingGames}
-      <h2> {this.props.pendingGames[this.props.pendingGames.length - 1].id}</h2>
       <button className="ui button" onClick={this.createGame}>
         Create a new Game
       </button>
