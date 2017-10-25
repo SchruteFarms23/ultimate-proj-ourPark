@@ -11,12 +11,14 @@ import registerServiceWorker from './registerServiceWorker';
 import userReducer from './Reducers/userReducer'
 import mapsReducer from './Reducers/mapsReducer'
 import parkReducer from './Reducers/parkReducer'
+import gameReducer from './Reducers/gameReducer'
 import {autoRehydrate, persistStore } from 'redux-persist';
 
 const rootReducers= combineReducers({
   user: userReducer,
   maps: mapsReducer,
-  park: parkReducer
+  park: parkReducer,
+  game: gameReducer
 })
 const store = createStore(rootReducers, composeWithDevTools(
   applyMiddleware(thunk),

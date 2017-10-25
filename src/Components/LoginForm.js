@@ -25,7 +25,7 @@ state = {
     // clear fields
     const loginParams = {   email:this.state.email, password: this.state.password}
 
-    if(this.state.email.length > 0 && this.state.password.length > 0){
+    if(this.state.email.length > 0 && this.state.password.length > 0 ){
       console.log(this.props)
       this.props.logIn(loginParams, this.props)
     }
@@ -50,12 +50,14 @@ state = {
 
   }
   render() {
+    console.log(this.props)
 
     // console.log("RENDERING")
     // ARE WE LOGGED IN
       return (
 
         <div>
+        {this.props.location.pathname === "/login" ? <Navbar /> : null}
           <MuiThemeProvider>
             <div>
             <ul>
@@ -75,7 +77,7 @@ state = {
           </div>
          </MuiThemeProvider>
       </div>
-      
+
 
       )
     }

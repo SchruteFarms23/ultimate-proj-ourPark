@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+// import { Modal} from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
 import { addPark,checkOut } from '../Actions/user'
 import { addUser, removeUser } from '../Actions/map'
@@ -13,6 +14,9 @@ class MarkerModal extends React.Component {
     })
   }
 
+  doClose = () =>{
+    this.props.close()
+  }
   doCheckIn = () =>{
     const parkId = this.props.currentPark.id
     if(this.props.user && this.props.user.park_id === null){
@@ -63,13 +67,8 @@ class MarkerModal extends React.Component {
     </div>
   </div>
   <div className="actions">
-    <div className="ui black deny button" onClick={this.doCheckOut}>
-      Check Me Out
-    </div>
-    <div className="ui positive right labeled icon button" onClick={this.doCheckIn}>
-      Check Me In
-      <i className="checkmark icon"></i>
-    </div>
+  {this.props.user.park_id === null ? <div><div className="ui red deny button" onClick={this.doClose}>X</div>  <div className="ui positive right labeled icon button" onClick={this.doCheckIn}>Check Me In<i className="checkmark icon"></i></div></div> : <div><div className="ui red deny button" onClick={this.doClose}>X</div> <div className="ui black deny button" onClick={this.doCheckOut}>Check Me Out</div></div>}
+
   </div>
 </div>
       )
@@ -109,5 +108,7 @@ function mapDispatchToProps(dispatch){
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MarkerModal));
 
+// {!this.props.user.park_id?  <div className="ui black deny button" onClick={this.doCheckOut}>Check Me Out</div><div className="ui positive right labeled icon button" onClick={this.doCheckIn}>Check Me In<i className="checkmark icon"></i></div>}
 
+// {this.props.teamTwo.users.length >= 1?  <button className="ui button">{this.props.teamTwo.users[0].name}</button> : <button className="ui button" onClick={() => this.addUserToTeam(this.props.teamTwo.id)}> Fill Spot</button>}
 // <a href="https://www.gravatar.com" target="_blank">gravatar</a>

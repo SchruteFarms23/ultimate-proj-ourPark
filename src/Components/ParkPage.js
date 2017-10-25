@@ -7,8 +7,14 @@ import PendingGamesContainer from './PendingGamesContainer'
 
 
 
+
   class ParkPage extends React.Component{
-  
+
+    componentDidMount(){
+      console.log(this.props)
+
+    }
+
   render(){
 
     return(
