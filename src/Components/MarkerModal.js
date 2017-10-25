@@ -52,10 +52,9 @@ class MarkerModal extends React.Component {
   render(){
     console.log(this.props)
     if(this.props.visible){
-      debugger
       const users = this.props.currentPark.users.map(user => <li key={user.id}>{user.name}</li>)
       if(this.props.loggedIn && this.props.user.park_id === null ){
-        debugger
+
       return(
         <div className="ui active modal">
   <i className="close icon"></i>
