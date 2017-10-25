@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import ParkPlayersColumn from './ParkPlayersColumn'
 import ActiveGamesContainer from './ActiveGamesContainer'
 import PendingGamesContainer from './PendingGamesContainer'
+import {setCurrentUser} from '../Actions/user'
+import { fetchCurrentPark } from '../Actions/park'
 
 
 
@@ -12,6 +14,11 @@ import PendingGamesContainer from './PendingGamesContainer'
 
     componentDidMount(){
       console.log(this.props)
+      if(!this.props.user_id){
+        this.props.setCurrentUser()
+      }
+      const parkId = this.props.location.pathname.split('/').pop()
+      this.props.fetchCurrentPark(parkId)
 
     }
 
@@ -48,4 +55,17 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(ParkPage);
+function mapDispatchToProps(dispatch){
+  return{
+    setCurrentUser: () => {
+      dispatch(setCurrentUser())
+    },
+    fetchCurrentPark: (params) => {
+      dispatch(fetchCurrentPark(params)) // Going to put this in parks action
+    }
+  }
+}
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(ParkPage);

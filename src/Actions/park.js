@@ -1,4 +1,4 @@
-
+import {addCurrentPark} from './map'
 
 export function activeGames(games){
   console.log(games)
@@ -35,6 +35,16 @@ export function addUser(user,gameId,teamId){
     type: "ADD_USER_TO_TEAM",
     payload: {user,gameId,teamId}
   }
+}
+
+export function fetchCurrentPark(id){
+  return function(dispatch){
+    const url= "http://localhost:3000/parks/"
+    return fetch(url + id)
+    .then(res => res.json())
+    .then(park => dispatch(addCurrentPark(park)))
+
+}
 }
 
 export function fetchCurrentTeam(id){

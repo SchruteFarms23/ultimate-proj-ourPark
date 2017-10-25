@@ -28,7 +28,21 @@ export function logOut(){
   }
 }
 
-
+export function setCurrentUser(){
+  return function(dispatch){
+    const token = localStorage.getItem("jwtToken")
+    return fetch("http://localhost:3000/getuser",{
+      method: 'get',
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(user => dispatch(setUser(user)))
+  }
+}
 
 export function signUp(user,props){
   return function(dispatch){

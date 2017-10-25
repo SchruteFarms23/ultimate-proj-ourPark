@@ -21,12 +21,10 @@ const rootReducers= combineReducers({
   game: gameReducer
 })
 const store = createStore(rootReducers, composeWithDevTools(
-  applyMiddleware(thunk),
-  autoRehydrate()
+  applyMiddleware(thunk)
   )
 )
 
-persistStore(store)
 
 ReactDOM.render(<Provider store={store} ><Router><App /></Router></Provider>, document.getElementById('root'));
 registerServiceWorker();

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import '../App.css';
 import MapComponent from './MapComponent'
 import LoginForm  from './LoginForm';
@@ -11,17 +11,26 @@ import Home from './Home';
 import Navbar from './Navbar';
 import 'semantic-ui-css/semantic.min.css';
 import SignUp from './SignUp';
+import {setCurrentUser} from '../Actions/user'
+import { connect } from 'react-redux'
 
 
 
-export default class App extends Component {
+class App extends Component {
 
-
+  constructor(props){
+    super(props)
+    const jwt_token = localStorage.getItem('jwtToken')
+    if(jwt_token){
+      props.setCurrentUser()
+    }
+  }
 
 
   render() {
 
     return (
+
       <Switch>
 
 
@@ -35,17 +44,17 @@ export default class App extends Component {
 
 
       </Switch>
+      
     );
   }
 }
 
-// export default GoogleApiWrapper({
-//   apiKey: 'AIzaSyC9a3aSF0IZbzVYpu5689hQb9FzsiDNtuo'
-// })(App)
+function mapDispatchToProps(dispatch){
+  return{
+    setCurrentUser: () => {
+      dispatch(setCurrentUser())
+    }
+  }
+}
 
-
-
-// 'AIzaSyC9a3aSF0IZbzVYpu5689hQb9FzsiDNtuo'
-
-
-// <Route exact path="/logout" component={Logout} />
+export default withRouter(connect(null,mapDispatchToProps)(App));

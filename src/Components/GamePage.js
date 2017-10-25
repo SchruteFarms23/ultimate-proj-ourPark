@@ -9,12 +9,14 @@ import { fetchCurrentGame } from '../Actions/game'
      console.log("hi from gamepage mouting", gameId)
      this.props.fetchCurrentGame(gameId)
    }
+
   render(){
     console.log("hi from gamePage", this.props)
 
     return(
       <div>
       <Navbar />
+      <input type="number" />
       <p>{this.props.currentGame.id}</p>
       </div>
     )

@@ -50,10 +50,6 @@ state = {
 
   }
   render() {
-    console.log(this.props)
-
-    // console.log("RENDERING")
-    // ARE WE LOGGED IN
       return (
 
         <div>
