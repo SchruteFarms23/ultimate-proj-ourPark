@@ -11,18 +11,11 @@ class UserCardHome extends React.Component{
     <div className="content">
       <a className="header">{this.props.user.name}</a>
       <div className="meta">
-        <span className="date">Joined in 2013</span>
+        <span className="date">From: {this.props.user.home}</span>
       </div>
-      <div className="description">
-        Kristy is an art director living in New York.
-      </div>
+
     </div>
-    <div className="extra content">
-      <a>
-        <i className="user icon"></i>
-        22 Friends
-      </a>
-    </div>
+    
   </div>
 
     )

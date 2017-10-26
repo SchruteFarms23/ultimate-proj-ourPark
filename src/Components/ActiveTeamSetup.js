@@ -6,7 +6,7 @@ export default class ActiveTeamSetup extends React.Component{
       const teamOneMappedPlayers = this.props.teamOne.users.map(player => <button key={player.id} className="ui button">{player.name}</button> )
     return(
     <div>
-    <div> <p>Team One</p> </div>
+    <div> <p>Team One: {this.props.teamOne.points}</p> </div>
       {teamOneMappedPlayers}
     </div>
   )
@@ -15,7 +15,7 @@ export default class ActiveTeamSetup extends React.Component{
 
   return(
   <div>
-  <div> <p>Team Two</p> </div>
+  <div> <p>Team Two: {this.props.teamTwo.points}</p> </div>
     {teamTwoMappedPlayers}
   </div>
   )
