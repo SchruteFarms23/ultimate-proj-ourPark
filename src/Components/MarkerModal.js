@@ -45,7 +45,7 @@ class MarkerModal extends React.Component {
       }
       this.props.removeUser(this.props.user_id)
       this.props.checkOut(params)
-      this.props.close()
+
     }
   }
 
@@ -79,7 +79,7 @@ class MarkerModal extends React.Component {
 </div>
       )
     } else if((this.props.loggedIn && this.props.user.park_id !== null) && (this.props.currentPark.id === this.props.user.park_id) ){
-      debugger
+      
       return(
         <div className="ui active modal">
   <i className="close icon"></i>
@@ -127,6 +127,33 @@ class MarkerModal extends React.Component {
 </div>
 </div>
     )
+  } else if(!this.props.loggedIn){
+
+    return(
+      <div className="ui active modal">
+<i className="close icon"></i>
+<div className="header">
+  {this.props.currentPark.name}
+</div>
+<div className="image content">
+  <div className="ui medium image">
+    <img src="/images/avatar/large/chris.jpg"/>
+  </div>
+  <div className="description">
+    <div className="ui header">People Currently Checked In to The Park</div>
+    {users}
+  </div>
+</div>
+<div className="actions">
+  <div>
+    <div className="ui red deny button" onClick={this.doClose}>X</div>
+    <div className="ui positive right labeled icon button" onClick={this.doCheckIn}>Check Me In<i className="checkmark icon"></i></div>
+
+  </div>
+</div>
+</div>
+    )
+
   }
     }else {
       return(

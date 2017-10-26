@@ -8,8 +8,9 @@ class ParkPlayersColumn extends React.Component{
 
 
   render(){
-    this.props.players
+    // this.props.players
     if(this.props.currentPark.users){
+      // debugger
       const mappedPlayers = this.props.currentPark.users.map(player => <PlayerItem key={player.id} player={player} />)
     return(
       <div>

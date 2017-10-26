@@ -11,6 +11,7 @@ export default function mapsReducer(state={currentPark:{}} ,action){
         }
       }
     case "REMOVE_PLAYER_FROM_PARK":
+    
     const newusers = state.currentPark.users.filter(user => user.id !== action.payload)
       return {
         ...state,
