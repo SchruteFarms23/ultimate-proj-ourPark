@@ -61,6 +61,7 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
      const params = {...this.state, scoreTeamOne:scoreTeamOne, scoreTeamTwo: scoreTeamTwo, game_id:this.props.currentGame.id}
      console.log(params)
      const body = JSON.stringify(params)
+     const parkId = this.props.currentGame.park_id
      fetch("http://localhost:3000/stats/update",{
        method: 'post',
        body: body,
@@ -70,6 +71,7 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
      }
      })
      .then(res => res.json())
+     .then(res => this.props.history.push('/parks/' + parkId))
    }
 
    handlePointsOne = (event) => {

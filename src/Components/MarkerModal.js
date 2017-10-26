@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { addPark,checkOut } from '../Actions/user'
 import { addUser, removeUser } from '../Actions/map'
+import '../index.css'
 
 
 class MarkerModal extends React.Component {
@@ -49,6 +50,13 @@ class MarkerModal extends React.Component {
     }
   }
 
+  goBackIn =() => {
+    console.log(this.props)
+    console.log("hi")
+    const parkId = this.props.currentPark.id
+    this.props.history.push('/parks/' + parkId)
+  }
+
   render(){
     console.log(this.props)
     if(this.props.visible){
@@ -56,7 +64,7 @@ class MarkerModal extends React.Component {
       if(this.props.loggedIn && this.props.user.park_id === null ){
 
       return(
-        <div className="ui active modal">
+        <div  className="ui active modal">
   <i className="close icon"></i>
   <div className="header">
     {this.props.currentPark.name}
@@ -79,7 +87,7 @@ class MarkerModal extends React.Component {
 </div>
       )
     } else if((this.props.loggedIn && this.props.user.park_id !== null) && (this.props.currentPark.id === this.props.user.park_id) ){
-      
+
       return(
         <div className="ui active modal">
   <i className="close icon"></i>
@@ -99,12 +107,12 @@ class MarkerModal extends React.Component {
     <div>
     <div className="ui red deny button" onClick={this.doClose}>X</div>
     <div className="ui black deny button" onClick={this.doCheckOut}>Check Me Out</div>
+    <div className="ui blue deny button" onClick={this.goBackIn}>Go back inside</div>
     </div>
   </div>
 </div>
       )
     }else if((this.props.loggedIn && this.props.user.park_id !== null) && (this.props.currentPark.id !== this.props.user.park_id)){
-    debugger
     return(
       <div className="ui active modal">
 <i className="close icon"></i>

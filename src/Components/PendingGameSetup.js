@@ -26,6 +26,8 @@ class PendingGameSetup extends React.Component{
   }
 }
 
+
+
 function mapDispatchToProps(dispatch) {
 
   return {

@@ -147,10 +147,11 @@ class MapComponent extends React.Component {
 
     return (
       <div>
+      <MarkerModal visible={this.state.modalOpen} close={this.close}/>
       <div ref='map' style={style}>
         Loading map...
       </div>
-      <MarkerModal visible={this.state.modalOpen} close={this.close}/>
+
       </div>
     )
   }

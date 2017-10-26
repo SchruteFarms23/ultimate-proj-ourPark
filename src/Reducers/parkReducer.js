@@ -18,7 +18,7 @@ export default function parkReducer(state={activeGames:[],pendingGames:[]},actio
       var team = game.teams[teamIdx] //team obj
 
       var newTeam = Object.assign({}, team, {users: [...team.users, action.payload.user]}) //new Team object that will be added to pendingGames, then to state with NEW USER
-      var newGame = Object.assign({}, game, {teams: [...game.teams.slice(0, teamIdx), newTeam, ...game.teams.slice(teamIdx + 1)]}) //new game object where target team is replaced by the newly created team obj
+      var newGame = Object.assign({}, game, {teams: [...game.teams.slice(0, teamIdx), newTeam, ...game.teams.slice(teamIdx + 1)], users: [...game.users, action.payload.user]}) //new game object where target team is replaced by the newly created team obj
 
       //we have newGame object, just need to drop it into state
 
