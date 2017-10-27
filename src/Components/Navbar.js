@@ -31,7 +31,7 @@ class Navbar extends React.Component {
       <div className="ui blue header menu">
 
 	        <NavLink activeClassName="active" className="item" to="/">Home</NavLink>
-          <NavLink activeClassName="active" className="item left" to="/me">My Profile</NavLink>
+          <NavLink activeClassName="active" className="item left" to={`/players/${this.props.user_id}`}>My Profile</NavLink>
           <NavLink onClick={this.logout} activeClassName="active" className="item right" to="/">Logout</NavLink>
 
 
@@ -39,6 +39,14 @@ class Navbar extends React.Component {
 
     )
   }
+  }
+}
+
+function mapStateToProps(state){
+  return {
+    user: state.user.user,
+    user_id: state.user.user_id,
+    currentPark: state.maps.currentPark
   }
 }
 
@@ -50,4 +58,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Navbar)
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

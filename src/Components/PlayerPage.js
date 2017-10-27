@@ -102,6 +102,9 @@ var styles = {
     </div>
     <div className="ten wide column">
       <h1>{this.state.player.name}</h1>
+      <div style={styles.graphContainer}>
+      {this.state.player.stats ? <Line data={chartData} options={chartOptions} width={1700} height={500} /> : null}
+      </div>
       <p></p>
     </div>
     <div className="three wide column">
@@ -113,9 +116,6 @@ var styles = {
       <img/>
     </div>
     <div className="ten wide column">
-    <div style={styles.graphContainer}>
-    {this.state.player.stats ? <Line data={chartData} options={chartOptions} width={1700} height={500} /> : null}
-    </div>
       <p></p>
     </div>
     <div className="three wide column">

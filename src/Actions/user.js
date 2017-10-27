@@ -86,20 +86,24 @@ export function logIn(params,props){
     })
       .then((user) => {
         if(user.user){
-        localStorage.setItem("jwtToken", user.jwt)
-        dispatch(setUser(user.user))
-      }else{
-        return null
-      }
+          localStorage.setItem("jwtToken", user.jwt)
+          dispatch(setUser(user.user))
+          console.log("hi", user);
+          props.history.push(`/players/${user.user.id}`)
+        }else{
+          props.history.push('/')
+          alert("bad user password")
+          // return null
+        }
       })
-      .then((res) => {
-        console.log(res)
-        if(res !== null){
-         props.history.push('/me')
-       }else{
-         props.history.push('/')
-       }
-     })
+    //   .then((res) => {
+    //     console.log(res)
+    //     if(res !== null){
+    //      props.history.push('/me')
+    //    }else{
+    //      props.history.push('/')
+    //    }
+    //  })
     }
   }
 
