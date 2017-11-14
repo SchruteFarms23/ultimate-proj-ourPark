@@ -27,7 +27,7 @@ import UserCardHome from './UserCardHome';
     return(
       <div>
       <Navbar />
-      <div className="ui grid">
+      <div className="ui stackable grid">
 
         <div className="two wide column"><LoginForm {...this.props} /></div>
 
@@ -40,7 +40,7 @@ import UserCardHome from './UserCardHome';
     return(
       <div>
       <Navbar />
-      <div className="ui grid">
+      <div className="ui padded stackable grid">
 
         <div className="two wide column"><UserCardHome {...this.props} /></div>
 

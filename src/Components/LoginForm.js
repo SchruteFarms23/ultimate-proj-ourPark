@@ -17,23 +17,14 @@ state = {
 
 
   handleSubmit = (event) => {
-    // console.log(this.state.username)
-    // debugger;
     event.preventDefault()
     console.log("Clicking Button", this.state.email, this.state.password)
-    // send some api call to the backend
-    // clear fields
     const loginParams = {   email:this.state.email, password: this.state.password}
 
     if(this.state.email.length > 0 && this.state.password.length > 0 ){
       console.log(this.props)
       this.props.logIn(loginParams, this.props)
     }
-    // this.setState({
-    //   email: "",
-    //   password: ""
-    // })
-
   }
 
 

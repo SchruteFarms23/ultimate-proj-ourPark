@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { Modal} from 'semantic-ui-react'
 import { withRouter, Link } from 'react-router-dom'
 import { addPark,checkOut } from '../Actions/user'
 import { addUser, removeUser } from '../Actions/map'
@@ -18,18 +17,19 @@ class MarkerModal extends React.Component {
   doClose = () =>{
     this.props.close()
   }
+
   doCheckIn = () =>{
     const parkId = this.props.currentPark.id
     if(this.props.user && this.props.user.park_id === null){
     const params = {
       user_id: this.props.user_id,
-      park_id: parkId
+      park_id: parkId,
+      props: this.props
     }
     this.props.addUser(this.props.user)
 
     this.props.addPark(params)
-
-    this.props.history.push('/parks/' + parkId)
+    
   } else if(Object.keys(this.props.user).length !== 0 && this.props.user.park_id !== null){
     alert ("You are already checked in to a park.")
   } else if(Object.keys(this.props.user).length === 0){

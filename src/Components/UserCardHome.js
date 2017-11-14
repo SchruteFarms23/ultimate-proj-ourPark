@@ -10,12 +10,8 @@ class UserCardHome extends React.Component{
     </div>
     <div className="content">
       <a className="header">{this.props.user.name}</a>
-      <div className="meta">
-        <span className="date">From: {this.props.user.home}</span>
-      </div>
-
     </div>
-    
+
   </div>
 
     )

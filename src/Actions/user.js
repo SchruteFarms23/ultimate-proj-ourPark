@@ -123,6 +123,7 @@ export function addPark(params){
   .then((user) => {
     dispatch(setUser(user.user))
   })
+  .then(params.props.history.push('/parks/' + params.park_id))
   }
 }
 
