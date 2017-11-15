@@ -5,7 +5,6 @@ import Navbar from './Navbar';
 
 class UserProfileContainer extends React.Component{
   render(){
-    console.log(this.props)
     return(
       <div>
       <Navbar />

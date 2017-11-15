@@ -15,6 +15,7 @@ import { fetchCurrentPark } from '../Actions/park'
     componentDidMount(){
       console.log(this.props)
       if(!this.props.user_id){
+        console.log("setting user from park page")
         this.props.setCurrentUser()
       }
       const parkId = this.props.location.pathname.split('/').pop()

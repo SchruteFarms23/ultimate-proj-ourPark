@@ -4,6 +4,7 @@ import LoginForm  from './LoginForm';
 import Navbar from './Navbar';
 import { GoogleApiWrapper } from 'google-maps-react';
 import UserCardHome from './UserCardHome';
+import UserParkSegment from './UserParkSegment'
 
 
 
@@ -42,7 +43,12 @@ import UserCardHome from './UserCardHome';
       <Navbar />
       <div className="ui padded stackable grid">
 
-        <div className="two wide column"><UserCardHome {...this.props} /></div>
+        <div className="two wide column">
+          <UserCardHome {...this.props} />
+
+          <UserParkSegment />
+          
+        </div>
 
 
         <div className="two wide column">  <MapComponent google={this.props.google} parks={this.state.parks} history ={this.props.history} /></div>

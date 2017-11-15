@@ -2,8 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { addCurrentPark } from '../Actions/map'
+import { fetchCurrentPark } from '../Actions/park'
 import MarkerModal from './MarkerModal'
+import {  Loader } from 'semantic-ui-react'
 
 
 class MapComponent extends React.Component {
@@ -17,7 +18,8 @@ class MapComponent extends React.Component {
   }
 
   openModal = (park)=> {
-    this.props.addCurrentPark(park)
+    console.log(park.id)
+    this.props.fetchCurrentPark(park.id)
 
     this.setState({
       modalOpen: !this.state.modalOpen
@@ -75,15 +77,12 @@ class MapComponent extends React.Component {
 
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log(prevProps)
-    // console.log(prevState)
     if (prevProps.google !== this.props.google || prevProps.parks !== this.props.parks || prevProps.user.park_id !== this.props.user.park_id) {
       this.loadMap();
     }
     if (prevState.currentLocation !== this.state.currentLocation) {
       this.recenterMap();
     }
-
   }
 
   loadMap() {
@@ -117,7 +116,6 @@ class MapComponent extends React.Component {
         }else{
           users = "No one is in the park."
         }
-        // console.log(this.doCheckIn)
 
         const checkin = `<button id = "checkin">Check In!</button>`
         const checkout = `<button id = "checkout">Check Out!</button>`
@@ -126,13 +124,9 @@ class MapComponent extends React.Component {
 
 
         marker.addListener('click', function() {
-          /// we need it to open the specific marker and show the things associated with it
-          ///
-          // infowindow.open(this.map, marker);
           that.openModal(park)
         });
       })
-      //end mapping
 
     }
   }
@@ -149,7 +143,7 @@ class MapComponent extends React.Component {
       <div>
       <MarkerModal visible={this.state.modalOpen} close={this.close}/>
       <div ref='map' style={style}>
-        Loading map...
+        <Loader active inline='centered' size='massive' />
       </div>
 
       </div>
@@ -166,8 +160,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return{
-    addCurrentPark: (park) => {
-      dispatch(addCurrentPark(park))
+    fetchCurrentPark: (park) => {
+      dispatch(fetchCurrentPark(park))
   }
  }
 }
@@ -175,33 +169,3 @@ function mapDispatchToProps(dispatch){
 
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MapComponent));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     google.maps.event.addListener(infowindow, 'domready', function() {
-// document.getElementById("checkin").addEventListener("click", function(){
-//   console.log(park.id)
-//   that.doCheckIn(park.id);
-//
-//
-// });
-// });
-//     google.maps.event.addListener(infowindow, 'domready', function() {
-// document.getElementById("checkout").addEventListener("click", function(){
-//   console.log(park.id)
-//   that.doCheckOut(park.id);
-
-
-// });
-// });

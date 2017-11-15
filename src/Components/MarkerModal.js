@@ -29,7 +29,7 @@ class MarkerModal extends React.Component {
     this.props.addUser(this.props.user)
 
     this.props.addPark(params)
-    
+
   } else if(Object.keys(this.props.user).length !== 0 && this.props.user.park_id !== null){
     alert ("You are already checked in to a park.")
   } else if(Object.keys(this.props.user).length === 0){
@@ -51,15 +51,12 @@ class MarkerModal extends React.Component {
   }
 
   goBackIn =() => {
-    console.log(this.props)
-    console.log("hi")
     const parkId = this.props.currentPark.id
     this.props.history.push('/parks/' + parkId)
   }
 
   render(){
-    console.log(this.props)
-    if(this.props.visible){
+    if(this.props.visible && this.props.currentPark.users){
       const users = this.props.currentPark.users.map(user => <li key={user.id}>{user.name}</li>)
       if(this.props.loggedIn && this.props.user.park_id === null ){
 

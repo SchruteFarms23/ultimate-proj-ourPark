@@ -22,6 +22,7 @@ class App extends Component {
     super(props)
     const jwt_token = localStorage.getItem('jwtToken')
     if(jwt_token){
+      console.log("Hi from app.js")
       props.setCurrentUser()
     }
   }
