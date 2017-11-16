@@ -7,15 +7,14 @@ import { checkOut } from '../Actions/user'
 class UserParkSegment extends React.Component{
 
   doCheckOut = () => {
-    const parkId = this.props.currentPark.id
+    const parkId = this.props.user_park
+    debugger
     if(this.props.user && this.props.user.park_id !== null){
       const params = {
         user_id: this.props.user_id,
         park_id: parkId
       }
-      this.props.removeUser(this.props.user_id)
       this.props.checkOut(params)
-
     }
   }
 
@@ -27,8 +26,8 @@ class UserParkSegment extends React.Component{
     }
     return(
       <div className="ui stackable padded segment">
-        {this.props.user.park ? <div><p><h3>Current Park</h3>: {this.props.user.park.name}</p> <iframe width="100%" height="200" src={place}></iframe>
-</div>  : <p> You are not currently checked into a park </p>}
+        {this.props.user.park ? <div><h3>Current Park</h3>: {this.props.user.park.name} <iframe width="100%" height="200" src={place}></iframe>
+          <div className="ui black deny button" onClick={this.doCheckOut}>Check Me Out</div></div>  : <p> You are not currently checked into a park </p>}
       </div>
     )
   }
@@ -40,7 +39,6 @@ function mapStateToProps(state){
     user: state.user.user,
     user_id: state.user.user_id,
     loggedIn: state.user.loggedIn,
-    currentPark: state.maps.currentPark,
     user_park: state.user.user.park_id
   }
 }
@@ -49,9 +47,6 @@ function mapDispatchToProps(dispatch){
   return{
   checkOut: (user) => {
     dispatch(checkOut(user))
-  },
-  removeUser: (user) => {
-    dispatch(removeUser(user))
   }
  }
 }
