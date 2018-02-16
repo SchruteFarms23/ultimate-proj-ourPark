@@ -8,7 +8,7 @@ class UserParkSegment extends React.Component{
 
   doCheckOut = () => {
     const parkId = this.props.user_park
-    debugger
+
     if(this.props.user && this.props.user.park_id !== null){
       const params = {
         user_id: this.props.user_id,
@@ -16,6 +16,11 @@ class UserParkSegment extends React.Component{
       }
       this.props.checkOut(params)
     }
+  }
+
+  goBackIn =() => {
+    const parkId = this.props.user_park
+    this.props.history.push('/parks/' + parkId)
   }
 
   render(){
@@ -27,7 +32,7 @@ class UserParkSegment extends React.Component{
     return(
       <div className="ui stackable padded segment">
         {this.props.user.park ? <div><h3>Current Park</h3>: {this.props.user.park.name} <iframe width="100%" height="200" src={place}></iframe>
-          <div className="ui black deny button" onClick={this.doCheckOut}>Check Me Out</div></div>  : <p> You are not currently checked into a park </p>}
+          <div className="ui black deny button" onClick={this.doCheckOut}>Check Me Out</div> <div className="ui blue deny button" onClick={this.goBackIn}>Go back inside</div> </div>  : <p> You are not currently checked into a park </p>}
       </div>
     )
   }
