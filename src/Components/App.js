@@ -11,8 +11,9 @@ import Home from './Home';
 import Navbar from './Navbar';
 import 'semantic-ui-css/semantic.min.css';
 import SignUp from './SignUp';
-import {setCurrentUser} from '../Actions/user'
-import { connect } from 'react-redux'
+import {setCurrentUser} from '../Actions/user';
+import { connect } from 'react-redux';
+import Header from './Header';
 
 
 
@@ -32,8 +33,9 @@ class App extends Component {
 
     return (
 
+      <div>
+      <Header />
       <Switch>
-
 
         <Route exact path="/" render={(props)=><Home {...props}/>}/>
         <Route exact path="/signup" render={(props)=><SignUp {...props}/>}/>
@@ -43,8 +45,8 @@ class App extends Component {
         <Route exact path="/parks/:id" render={(props)=> <ParkPage {...props} />}/>
         <Route exact path="/games/:id" render={(props)=> <GamePage {...props} />}/>
 
-
       </Switch>
+      </div>
 
     );
   }
