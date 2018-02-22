@@ -7,3 +7,23 @@ body {
 div.ui.modal {
   top: 30px;
 }
+
+#playerPage {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 50px;
+  text-align: center;
+}
+
+#userParkName {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 17px;
+  text-align: center;
+}
+
+#title {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  color:black;
+}

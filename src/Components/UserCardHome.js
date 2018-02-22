@@ -9,7 +9,7 @@ class UserCardHome extends React.Component{
       <img src={this.props.user.image_url}/>
     </div>
     <div className="content">
-      <a className="header">{this.props.user.name}</a>
+      <a id="title">{this.props.user.name}</a>
     </div>
 
   </div>

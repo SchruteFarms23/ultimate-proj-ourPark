@@ -19,12 +19,16 @@ class PendingGamesContainer extends React.Component{
   }
 
   render(){
-    console.log("rendering pending games")
+    const pStyle = {
+      textAlign:'center',
+      fontSize: '25px'
+    };
+
     if(this.props.pendingGames.length > 0){
       const mappedPendingGames = this.props.pendingGames.map(game => <PendingGameSetup key={game.id} game={game} history={this.props.history}/>)
     return(
       <div>
-      <h2> Pending Games </h2>
+      <p id="title" style={pStyle}> Pending Games </p>
       {mappedPendingGames}
       <button className="ui button" onClick={this.createGame}>
         Create a new Game

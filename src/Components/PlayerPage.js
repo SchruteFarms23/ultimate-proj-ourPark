@@ -85,7 +85,7 @@ var styles = {
         "backgroundColor" : '#fff',
         "borderColor" : "green",
         "height" : "235px",
-        "width" : "1150px",
+        "width" : "1170px",
         "marginTop" : "15px",
         "padding" : "20px"
     }
@@ -97,9 +97,9 @@ var styles = {
   <div className="row">
     <div className="three wide column">
       <img src={this.state.player.image_url}/>
+      <p id="playerPage">{this.state.player.name}</p>
     </div>
     <div className="ten wide column">
-      <h1>{this.state.player.name}</h1>
       <div style={styles.graphContainer}>
       {this.state.player.stats ? <Line data={chartData} options={chartOptions} width={1700} height={500} /> : null}
       </div>

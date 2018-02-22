@@ -18,7 +18,6 @@ class SignUp extends React.Component {
     weight:"",
     height:"",
     image_url:""
-
 	}
 
 	handleSubmit = (event) => {
@@ -33,11 +32,9 @@ class SignUp extends React.Component {
 		  }
 		if(this.state.password === this.state.passwordConfirm){
 			this.props.signUp(signupParams,this.props)
-    	// .then((res) => this.props.history.push('/'))
 		}else{
 			alert("Passwords do not match")
 		}
-
 	}
 
 
@@ -52,29 +49,32 @@ class SignUp extends React.Component {
     	this.setState({
         name: event.target.value
     })
-
-  }
+	}
 
 	handlePasswordChange = (event) => {
 	    this.setState({
 	    password: event.target.value
     })
   }
+
 	handleConfirmPasswordChange = (event) => {
 	    this.setState({
 	    passwordConfirm: event.target.value
     })
   }
+
 	handleWeightChange = (event) => {
 	    this.setState({
 	    weight: event.target.value
     })
   }
+
 	handleHeightChange = (event) => {
 	    this.setState({
 	    height: event.target.value
     })
   }
+
 	handleImage = (event) => {
 	    this.setState({
 	    image_url: event.target.value
@@ -123,7 +123,7 @@ class SignUp extends React.Component {
 							<br />
 						<TextField
 							hintText="Put in an Image url of yourself"
-              floatingLabelText="Put in an Image url of yourselft"
+              floatingLabelText="Put in an Image url of yourself"
 							onChange={this.handleImage} value={this.state.image_url} />
 							<br />
 

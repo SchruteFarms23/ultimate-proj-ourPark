@@ -31,7 +31,7 @@ class UserParkSegment extends React.Component{
     }
     return(
       <div className="ui stackable padded segment">
-        {this.props.user.park ? <div><h3>Current Park</h3>: {this.props.user.park.name} <iframe width="100%" height="200" src={place}></iframe>
+        {this.props.user.park ? <div><p id="title">Current Park</p> <p id="userParkName">{this.props.user.park.name}</p><iframe width="100%" height="200" src={place}></iframe>
           <div className="ui black deny button" onClick={this.doCheckOut}>Check Me Out</div> <div className="ui blue deny button" onClick={this.goBackIn}>Go back inside</div> </div>  : <p> You are not currently checked into a park </p>}
       </div>
     )

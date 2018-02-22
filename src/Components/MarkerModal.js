@@ -198,8 +198,3 @@ function mapDispatchToProps(dispatch){
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MarkerModal));
-
-// {!this.props.user.park_id?  <div className="ui black deny button" onClick={this.doCheckOut}>Check Me Out</div><div className="ui positive right labeled icon button" onClick={this.doCheckIn}>Check Me In<i className="checkmark icon"></i></div>}
-
-// {this.props.teamTwo.users.length >= 1?  <button className="ui button">{this.props.teamTwo.users[0].name}</button> : <button className="ui button" onClick={() => this.addUserToTeam(this.props.teamTwo.id)}> Fill Spot</button>}
-// <a href="https://www.gravatar.com" target="_blank">gravatar</a>

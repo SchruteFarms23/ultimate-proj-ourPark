@@ -47,7 +47,7 @@ import UserParkSegment from './UserParkSegment'
           <UserCardHome {...this.props} />
 
           <UserParkSegment />
-          
+
         </div>
 
 

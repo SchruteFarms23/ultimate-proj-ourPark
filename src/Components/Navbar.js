@@ -8,11 +8,6 @@ class Navbar extends React.Component {
   logout = () =>{
     localStorage.removeItem("jwtToken");
     this.props.logOut()
-    localStorage.removeItem("reduxPersist:user");
-    this.forceUpdate()
-
-
-
   }
 
   render(){

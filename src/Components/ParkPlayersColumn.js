@@ -4,15 +4,17 @@ import PlayerItem from './PlayerItem'
 
 class ParkPlayersColumn extends React.Component{
 
-
-
-
   render(){
+    const pStyle = {
+      textAlign:'center',
+      fontSize: '25px'
+    };
+
     if(this.props.currentPark.users){
       const mappedPlayers = this.props.currentPark.users.map(player => <PlayerItem key={player.id} player={player} />)
     return(
       <div>
-      <h2> Players Checked In </h2>
+      <p id="title" style={pStyle}> Players Checked In </p>
       <div className="ui items">
       {mappedPlayers}
       </div>

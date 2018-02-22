@@ -18,13 +18,16 @@ class ActiveGamesContainer extends React.Component{
 
 
   render(){
-    console.log("rendering")
-    console.log(this.props)
+    const pStyle = {
+      textAlign:'center',
+      fontSize: '25px'
+    };
+
     if(this.props.activeGames.length > 0){
       const mappedActiveGames = this.props.activeGames.map(game => <ActiveGameSetup key={game.id} game={game}/>)
     return(
       <div>
-      <h2>Active Games</h2>
+      <p id="title" style={pStyle}>Active Games</p>
       {mappedActiveGames}
       </div>
     )

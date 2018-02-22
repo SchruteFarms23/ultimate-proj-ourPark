@@ -18,11 +18,9 @@ state = {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log("Clicking Button", this.state.email, this.state.password)
     const loginParams = {   email:this.state.email, password: this.state.password}
 
     if(this.state.email.length > 0 && this.state.password.length > 0 ){
-      console.log(this.props)
       this.props.logIn(loginParams, this.props)
     }
   }
@@ -40,6 +38,7 @@ state = {
     })
 
   }
+
   render() {
       return (
 
@@ -71,8 +70,7 @@ state = {
 
   }
 const style = {
-margin: 15,
-
+  margin: 15,
 }
 
 function mapDispatchToProps(dispatch) {
