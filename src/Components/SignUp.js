@@ -30,10 +30,25 @@ class SignUp extends React.Component {
 		    height:this.state.height,
 		    image_url:this.state.image_url
 		  }
-		if(this.state.password === this.state.passwordConfirm){
+
+		let messages = [];
+
+		if(this.state.email === ""){
+			messages.push("Please enter an email")
+		}
+		if(this.state.name === ""){
+			messages.push("Please enter a name")
+		}
+		if((this.state.password != this.state.passwordConfirm) && this.state.password != ""){
+			messages.push("Passwords do not match")
+		}
+		if(this.state.password === ""){
+			messages.push("Please enter a password")
+		}
+		if(messages.length === 0){
 			this.props.signUp(signupParams,this.props)
 		}else{
-			alert("Passwords do not match")
+			alert(messages.join("\n"))
 		}
 	}
 

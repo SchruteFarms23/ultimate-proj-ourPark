@@ -443,14 +443,3 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
   }
 
 export default connect(mapStateToProps,mapDispatchToProps)(GamePage);
-
-
-
-
-// <div>
-// <Navbar />
-// <input type="number" />
-// <Divider horizontal> The Blacktop </Divider>
-// <input type="number" />
-// <p>{this.props.currentGame.id}</p>
-// </div>

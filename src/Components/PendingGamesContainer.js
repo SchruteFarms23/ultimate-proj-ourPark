@@ -30,7 +30,7 @@ class PendingGamesContainer extends React.Component{
       <div>
       <p id="title" style={pStyle}> Pending Games </p>
       {mappedPendingGames}
-      <button className="ui button" onClick={this.createGame}>
+      <button className="ui orange button" onClick={this.createGame}>
         Create a new Game
       </button>
       </div>
@@ -39,7 +39,7 @@ class PendingGamesContainer extends React.Component{
     return(
     <div>
     <h2> Pending Games </h2>
-    <button className="ui button" onClick={this.createGame}>
+    <button className="ui orange button" onClick={this.createGame}>
       Create a new Game
     </button>
     </div>

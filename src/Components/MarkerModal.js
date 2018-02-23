@@ -55,7 +55,10 @@ class MarkerModal extends React.Component {
     this.props.history.push('/parks/' + parkId)
   }
 
+
   render(){
+    const logo = require('../img/blacktop.png')
+
     if(this.props.visible && this.props.currentPark.users){
       const users = this.props.currentPark.users.map(user => <li key={user.id}>{user.name}</li>)
       if(this.props.loggedIn && this.props.user.park_id === null ){
@@ -64,14 +67,14 @@ class MarkerModal extends React.Component {
         <div  className="ui active modal">
   <i className="close icon"></i>
   <div className="header">
-    {this.props.currentPark.name}
+    <p id="title">{this.props.currentPark.name}</p>
   </div>
   <div className="image content">
-    <div className="ui medium image">
-      <img src="/images/avatar/large/chris.jpg"/>
+    <div className="ui small image">
+      <img src={logo}/>
     </div>
     <div className="description">
-      <div className="ui header">People Currently Checked In to The Park</div>
+      <div className="ui header"><p id="title">People Currently Checked In to The Park</p></div>
       {users}
     </div>
   </div>
@@ -89,14 +92,14 @@ class MarkerModal extends React.Component {
         <div className="ui active modal">
   <i className="close icon"></i>
   <div className="header">
-    {this.props.currentPark.name}
+    <p id="title">{this.props.currentPark.name}</p>
   </div>
   <div className="image content">
-    <div className="ui medium image">
-      <img src="/images/avatar/large/chris.jpg"/>
+    <div className="ui small image">
+      <img src={logo}/>
     </div>
     <div className="description">
-      <div className="ui header">People Currently Checked In to The Park</div>
+      <div className="ui header"><p id="title">People Currently Checked In to The Park</p></div>
       {users}
     </div>
   </div>
@@ -114,14 +117,14 @@ class MarkerModal extends React.Component {
       <div className="ui active modal">
 <i className="close icon"></i>
 <div className="header">
-  {this.props.currentPark.name}
+  <p id="title">{this.props.currentPark.name}</p>
 </div>
 <div className="image content">
-  <div className="ui medium image">
-    <img src="/images/avatar/large/chris.jpg"/>
+  <div className="ui small image">
+    <img src={logo}/>
   </div>
   <div className="description">
-    <div className="ui header">People Currently Checked In to The Park</div>
+    <div className="ui header"><p id="title">People Currently Checked In to The Park</p></div>
     {users}
   </div>
 </div>
@@ -138,14 +141,14 @@ class MarkerModal extends React.Component {
       <div className="ui active modal">
 <i className="close icon"></i>
 <div className="header">
-  {this.props.currentPark.name}
+  <p id="title">{this.props.currentPark.name}</p>
 </div>
 <div className="image content">
-  <div className="ui medium image">
-    <img src="/images/avatar/large/chris.jpg"/>
+  <div className="ui small image">
+    <img src={logo}/>
   </div>
   <div className="description">
-    <div className="ui header">People Currently Checked In to The Park</div>
+    <div className="ui header"><p id="title">People Currently Checked In to The Park</p></div>
     {users}
   </div>
 </div>
