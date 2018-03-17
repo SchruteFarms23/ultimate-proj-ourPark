@@ -2,8 +2,8 @@ import React from 'react';
 import Navbar from './Navbar';
 import { connect } from 'react-redux'
 import { fetchCurrentGame } from '../Actions/game'
-import { Segment, Button, Divider } from 'semantic-ui-react'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import {  Divider } from 'semantic-ui-react'
+import {  Table } from 'semantic-ui-react'
 
  class GamePage extends React.Component{
 
@@ -44,9 +44,8 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
      stlsThreeSec: "0",
      blksThreeSec: "0",
      threesThreeSec: "0"
-
-
    }
+
    componentDidMount(){
      const gameId = this.props.location.pathname.split('/').pop()
      console.log("hi from gamepage mouting", gameId)
@@ -62,6 +61,7 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
      console.log(params)
      const body = JSON.stringify(params)
      const parkId = this.props.currentGame.park_id
+
      fetch("http://localhost:3000/stats/update",{
        method: 'post',
        body: body,
@@ -74,184 +74,9 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
      .then(res => this.props.history.push('/parks/' + parkId))
    }
 
-   handlePointsOne = (event) => {
+   handleChange = (event) => {
      this.setState({
-       pointsOne: event.target.value
-     })
-   }
-   handleRebsOne = (event) => {
-     this.setState({
-       rebsOne: event.target.value
-     })
-   }
-   handleAstsOne = (event) => {
-     this.setState({
-       astsOne: event.target.value
-     })
-   }
-   handleStlsOne = (event) => {
-     this.setState({
-       stlsOne: event.target.value
-     })
-   }
-   handleBlksOne = (event) => {
-     this.setState({
-       blksOne: event.target.value
-     })
-   }
-   handleThreesOne = (event) => {
-     this.setState({
-       threesOne: event.target.value
-     })
-   }
-   handlePointsTwo = (event) => {
-     this.setState({
-       pointsTwo: event.target.value
-     })
-   }
-   handleRebsTwo = (event) => {
-     this.setState({
-       rebsTwo: event.target.value
-     })
-   }
-   handleAstsTwo = (event) => {
-     this.setState({
-       astsTwo: event.target.value
-     })
-   }
-   handleStlsTwo = (event) => {
-     this.setState({
-       stlsTwo: event.target.value
-     })
-   }
-   handleBlksTwo = (event) => {
-     this.setState({
-       blksTwo: event.target.value
-     })
-   }
-   handleThreesTwo = (event) => {
-     this.setState({
-       threesTwo: event.target.value
-     })
-   }
-   handlePointsThree = (event) => {
-     this.setState({
-       pointsThree: event.target.value
-     })
-   }
-   handleRebsThree = (event) => {
-     this.setState({
-       rebsThree: event.target.value
-     })
-   }
-   handleAstsThree = (event) => {
-     this.setState({
-       astsThree: event.target.value
-     })
-   }
-   handleStlsThree = (event) => {
-     this.setState({
-       stlsThree: event.target.value
-     })
-   }
-   handleBlksThree = (event) => {
-     this.setState({
-       blksThree: event.target.value
-     })
-   }
-   handleThreesThree = (event) => {
-     this.setState({
-       threesThree: event.target.value
-     })
-   }
-   handlePointsOneSec = (event) => {
-     this.setState({
-       pointsOneSec: event.target.value
-     })
-   }
-   handleRebsOneSec = (event) => {
-     this.setState({
-       rebsOneSec: event.target.value
-     })
-   }
-   handleAstsOneSec = (event) => {
-     this.setState({
-       astsOneSec: event.target.value
-     })
-   }
-   handleStlsOneSec = (event) => {
-     this.setState({
-       stlsOneSec: event.target.value
-     })
-   }
-   handleBlksOneSec = (event) => {
-     this.setState({
-       blksOneSec: event.target.value
-     })
-   }
-   handleThreesOneSec = (event) => {
-     this.setState({
-       threesOneSec: event.target.value
-     })
-   }
-   handlePointsTwoSec = (event) => {
-     this.setState({
-       pointsTwoSec: event.target.value
-     })
-   }
-   handleRebsTwoSec = (event) => {
-     this.setState({
-       rebsTwoSec: event.target.value
-     })
-   }
-   handleAstsTwoSec = (event) => {
-     this.setState({
-       astsTwoSec: event.target.value
-     })
-   }
-   handleStlsTwoSec = (event) => {
-     this.setState({
-       stlsTwoSec: event.target.value
-     })
-   }
-   handleBlksTwoSec = (event) => {
-     this.setState({
-       blksTwoSec: event.target.value
-     })
-   }
-   handleThreesTwoSec = (event) => {
-     this.setState({
-       threesTwoSec: event.target.value
-     })
-   }
-   handlePointsThreeSec = (event) => {
-     this.setState({
-       pointsThreeSec: event.target.value
-     })
-   }
-   handleRebsThreeSec = (event) => {
-     this.setState({
-       rebsThreeSec: event.target.value
-     })
-   }
-   handleAstsThreeSec = (event) => {
-     this.setState({
-       astsThreeSec: event.target.value
-     })
-   }
-   handleStlsThreeSec = (event) => {
-     this.setState({
-       stlsThreeSec: event.target.value
-     })
-   }
-   handleBlksThreeSec = (event) => {
-     this.setState({
-       blksThreeSec: event.target.value
-     })
-   }
-   handleThreesThreeSec = (event) => {
-     this.setState({
-       threesThreeSec: event.target.value
+       [event.target.name]: event.target.value
      })
    }
 
@@ -268,19 +93,6 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
        teamTwoScore:event.target.value
      })
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   render(){
@@ -310,30 +122,30 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
         <Table.Cell>
           {usersTeamOne[0].name}
         </Table.Cell>
-        <Table.Cell ><input value={this.state.pointsOne} id={usersTeamOne[0].id} type="number" onChange={this.handlePointsOne} /></Table.Cell>
-        <Table.Cell><input value={this.state.rebsOne} id={usersTeamOne[0].id} type="number" onChange={this.handleRebsOne}/></Table.Cell>
-        <Table.Cell><input value={this.state.astsOne} id={usersTeamOne[0].id} type="number" onChange={this.handleAstsOne}/></Table.Cell>
-        <Table.Cell><input value={this.state.stlsOne} id={usersTeamOne[0].id} type="number" onChange={this.handleStlsOne}/></Table.Cell>
-        <Table.Cell><input value={this.state.blksOne} id={usersTeamOne[0].id} type="number" onChange={this.handleBlksOne}/></Table.Cell>
-        <Table.Cell><input value={this.state.threesOne} id={usersTeamOne[0].id} type="number" onChange={this.handleThreesOne}/></Table.Cell>
+        <Table.Cell ><input value={this.state.pointsOne}  id={usersTeamOne[0].id}    type="number" onChange={this.handleChange} name="pointsOne" /></Table.Cell>
+        <Table.Cell><input value={this.state.rebsOne}     id={usersTeamOne[0].id}    type="number" onChange={this.handleChange} name="rebsOne"/></Table.Cell>
+        <Table.Cell><input value={this.state.astsOne}     id={usersTeamOne[0].id}    type="number" onChange={this.handleChange} name="astsOne"/></Table.Cell>
+        <Table.Cell><input value={this.state.stlsOne}     id={usersTeamOne[0].id}    type="number" onChange={this.handleChange} name="stlsOne"/></Table.Cell>
+        <Table.Cell><input value={this.state.blksOne}     id={usersTeamOne[0].id}    type="number" onChange={this.handleChange} name="blksOne"/></Table.Cell>
+        <Table.Cell><input value={this.state.threesOne}   id={usersTeamOne[0].id}    type="number" onChange={this.handleChange} name="threesOne"/></Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>{usersTeamOne[1].name}</Table.Cell>
-        <Table.Cell><input value={this.state.pointsTwo} id={usersTeamOne[1].id} type="number" onChange={this.handlePointsTwo} /></Table.Cell>
-        <Table.Cell><input value={this.state.rebsTwo} id={usersTeamOne[1].id} type="number" onChange={this.handleRebsTwo}/></Table.Cell>
-        <Table.Cell><input value={this.state.astsTwo} id={usersTeamOne[1].id} type="number" onChange={this.handleAstsTwo}/></Table.Cell>
-        <Table.Cell><input value={this.state.stlsTwo} id={usersTeamOne[1].id} type="number" onChange={this.handleStlsTwo}/></Table.Cell>
-        <Table.Cell><input value={this.state.blksTwo} id={usersTeamOne[1].id} type="number" onChange={this.handleBlksTwo}/></Table.Cell>
-        <Table.Cell><input value={this.state.threesTwo} id={usersTeamOne[1].id} type="number" onChange={this.handleThreesTwo}/></Table.Cell>
+        <Table.Cell><input value={this.state.pointsTwo} id={usersTeamOne[1].id} type="number"   onChange={this.handleChange} name="pointsTwo" /></Table.Cell>
+        <Table.Cell><input value={this.state.rebsTwo} id={usersTeamOne[1].id}   type="number"   onChange={this.handleChange} name="rebsTwo" /></Table.Cell>
+        <Table.Cell><input value={this.state.astsTwo} id={usersTeamOne[1].id}   type="number"   onChange={this.handleChange} name="astsTwo" /></Table.Cell>
+        <Table.Cell><input value={this.state.stlsTwo} id={usersTeamOne[1].id}   type="number"   onChange={this.handleChange} name="stlsTwo"/></Table.Cell>
+        <Table.Cell><input value={this.state.blksTwo} id={usersTeamOne[1].id}   type="number"   onChange={this.handleChange} name="blksTwo"/></Table.Cell>
+        <Table.Cell><input value={this.state.threesTwo} id={usersTeamOne[1].id} type="number"   onChange={this.handleChange} name="threesTwo"/></Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>{usersTeamOne[2].name}</Table.Cell>
-        <Table.Cell><input value={this.state.pointsThree} id={usersTeamOne[2].id} type="number" onChange={this.handlePointsThree}/></Table.Cell>
-        <Table.Cell><input value={this.state.rebsThree} id={usersTeamOne[2].id} type="number" onChange={this.handleRebsThree}/></Table.Cell>
-        <Table.Cell><input value={this.state.astsThree} id={usersTeamOne[2].id} type="number" onChange={this.handleAstsThree}/></Table.Cell>
-        <Table.Cell><input value={this.state.stlsThree} id={usersTeamOne[2].id} type="number" onChange={this.handleStlsThree}/></Table.Cell>
-        <Table.Cell><input value={this.state.blksThree} id={usersTeamOne[2].id} type="number" onChange={this.handleBlksThree}/></Table.Cell>
-        <Table.Cell><input value={this.state.threesThree} id={usersTeamOne[2].id} type="number" onChange={this.handleThreesThree}/></Table.Cell>
+        <Table.Cell><input value={this.state.pointsThree} id={usersTeamOne[2].id}   type="number"   onChange={this.handleChange} name="pointsThree" /></Table.Cell>
+        <Table.Cell><input value={this.state.rebsThree}   id={usersTeamOne[2].id}   type="number"   onChange={this.handleChange} name="rebsThree"/></Table.Cell>
+        <Table.Cell><input value={this.state.astsThree}   id={usersTeamOne[2].id}   type="number"   onChange={this.handleChange} name="astsThree"/></Table.Cell>
+        <Table.Cell><input value={this.state.stlsThree}   id={usersTeamOne[2].id}   type="number"   onChange={this.handleChange} name="stlsThree"/></Table.Cell>
+        <Table.Cell><input value={this.state.blksThree}   id={usersTeamOne[2].id}   type="number"   onChange={this.handleChange} name="blksThree"/></Table.Cell>
+        <Table.Cell><input value={this.state.threesThree} id={usersTeamOne[2].id}   type="number"   onChange={this.handleChange} name="threesThree"/></Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell> Team One Total: {scoreTeamOne}</Table.Cell>
@@ -367,30 +179,30 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
     <Table.Cell>
       {usersTeamTwo[0].name}
     </Table.Cell>
-    <Table.Cell ><input value={this.state.pointsOneSec} id={usersTeamTwo[0].id} type="number" onChange={this.handlePointsOneSec} /></Table.Cell>
-    <Table.Cell><input value={this.state.rebsOneSec} id={usersTeamTwo[0].id} type="number" onChange={this.handleRebsOneSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.astsOneSec} id={usersTeamTwo[0].id} type="number" onChange={this.handleAstsOneSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.stlsOneSec} id={usersTeamTwo[0].id} type="number" onChange={this.handleStlsOneSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.blksOneSec} id={usersTeamTwo[0].id} type="number" onChange={this.handleBlksOneSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.threesOneSec} id={usersTeamTwo[0].id} type="number" onChange={this.handleThreesOneSec}/></Table.Cell>
+    <Table.Cell ><input value={this.state.pointsOneSec} id={usersTeamTwo[0].id} type="number" onChange={this.handleChange} name="pointsOneSec" /></Table.Cell>
+    <Table.Cell><input value={this.state.rebsOneSec}    id={usersTeamTwo[0].id} type="number" onChange={this.handleChange} name="rebsOneSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.astsOneSec}    id={usersTeamTwo[0].id} type="number" onChange={this.handleChange} name="astsOneSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.stlsOneSec}    id={usersTeamTwo[0].id} type="number" onChange={this.handleChange} name="stlsOneSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.blksOneSec}    id={usersTeamTwo[0].id} type="number" onChange={this.handleChange} name="blksOneSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.threesOneSec}  id={usersTeamTwo[0].id} type="number" onChange={this.handleChange} name="threesOneSec"/></Table.Cell>
   </Table.Row>
   <Table.Row>
     <Table.Cell>{usersTeamTwo[1].name}</Table.Cell>
-    <Table.Cell><input value={this.state.pointsTwoSec} id={usersTeamTwo[1].id} type="number" onChange={this.handlePointsTwoSec} /></Table.Cell>
-    <Table.Cell><input value={this.state.rebsTwoSec} id={usersTeamTwo[1].id} type="number" onChange={this.handleRebsTwoSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.astsTwoSec} id={usersTeamTwo[1].id} type="number" onChange={this.handleAstsTwoSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.stlsTwoSec} id={usersTeamTwo[1].id} type="number" onChange={this.handleStlsTwoSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.blksTwoSec} id={usersTeamTwo[1].id} type="number" onChange={this.handleBlksTwoSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.threesTwoSec} id={usersTeamTwo[1].id} type="number" onChange={this.handleThreesTwoSec}/></Table.Cell>
+    <Table.Cell><input value={this.state.pointsTwoSec} id={usersTeamTwo[1].id} type="number" onChange={this.handleChange}  name="pointsTwoSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.rebsTwoSec}   id={usersTeamTwo[1].id} type="number" onChange={this.handleChange}  name="rebsTwoSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.astsTwoSec}   id={usersTeamTwo[1].id} type="number" onChange={this.handleChange}  name="astsTwoSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.stlsTwoSec}   id={usersTeamTwo[1].id} type="number" onChange={this.handleChange}  name="stlsTwoSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.blksTwoSec}   id={usersTeamTwo[1].id} type="number" onChange={this.handleChange}  name="blksTwoSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.threesTwoSec} id={usersTeamTwo[1].id} type="number" onChange={this.handleChange}  name="threesTwoSec"/></Table.Cell>
   </Table.Row>
   <Table.Row>
     <Table.Cell>{usersTeamTwo[2].name}</Table.Cell>
-    <Table.Cell><input value={this.state.pointsThreeSec} id={usersTeamTwo[2].id} type="number" onChange={this.handlePointsThreeSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.rebsThreeSec} id={usersTeamTwo[2].id} type="number" onChange={this.handleRebsThreeSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.astsThreeSec} id={usersTeamTwo[2].id} type="number" onChange={this.handleAstsThreeSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.stlsThreeSec} id={usersTeamTwo[2].id} type="number" onChange={this.handleStlsThreeSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.blksThreeSec} id={usersTeamTwo[2].id} type="number" onChange={this.handleBlksThreeSec}/></Table.Cell>
-    <Table.Cell><input value={this.state.threesThreeSec} id={usersTeamTwo[2].id} type="number" onChange={this.handleThreesThreeSec}/></Table.Cell>
+    <Table.Cell><input value={this.state.pointsThreeSec} id={usersTeamTwo[2].id} type="number" onChange={this.handleChange} name="pointsThreeSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.rebsThreeSec}   id={usersTeamTwo[2].id} type="number" onChange={this.handleChange} name="rebsThreeSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.astsThreeSec}   id={usersTeamTwo[2].id} type="number" onChange={this.handleChange} name="astsThreeSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.stlsThreeSec}   id={usersTeamTwo[2].id} type="number" onChange={this.handleChange} name="stlsThreeSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.blksThreeSec}   id={usersTeamTwo[2].id} type="number" onChange={this.handleChange} name="blksThreeSec"/></Table.Cell>
+    <Table.Cell><input value={this.state.threesThreeSec} id={usersTeamTwo[2].id} type="number" onChange={this.handleChange} name="threesThreeSec"/></Table.Cell>
   </Table.Row>
   <Table.Row>
     <Table.Cell> Team Two Total: {scoreTeamTwo}</Table.Cell>
@@ -412,14 +224,10 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
     )
   }else{
     return(
-    null
-  )
+      null
+    )
   }
-
-  }
-
-
-
+}
 
 }
 

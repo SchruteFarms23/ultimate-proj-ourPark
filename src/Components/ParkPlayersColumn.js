@@ -12,6 +12,7 @@ class ParkPlayersColumn extends React.Component{
 
     if(this.props.currentPark.users){
       const mappedPlayers = this.props.currentPark.users.map(player => <PlayerItem key={player.id} player={player} />)
+      console.log("mappedPlayers:",mappedPlayers)
     return(
       <div>
       <p id="title" style={pStyle}> Players Checked In </p>
@@ -21,6 +22,7 @@ class ParkPlayersColumn extends React.Component{
       </div>
     )
   }else{
+    console.log("rendering nothing")
     return(
       <p>...loading</p>
     )
@@ -29,6 +31,7 @@ class ParkPlayersColumn extends React.Component{
 }
 
 function mapStateToProps(state){
+  console.log("hitting in mapStateToProps")
   return {
     user: state.user.user,
     user_id: state.user.user_id,

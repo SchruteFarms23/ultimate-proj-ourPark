@@ -5,7 +5,6 @@ import ActiveTeamSetup from './ActiveTeamSetup'
 
 class ActiveGameSetup extends React.Component{
   render(){
-    console.log(this.props.game)
     return(
       <div className="ui raised segment">
       <h2>Game {this.props.game.id}: Score {this.props.game.teams[0].points} - {this.props.game.teams[1].points}</h2>

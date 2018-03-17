@@ -12,7 +12,6 @@ import userReducer from './Reducers/userReducer'
 import mapsReducer from './Reducers/mapsReducer'
 import parkReducer from './Reducers/parkReducer'
 import gameReducer from './Reducers/gameReducer'
-import {autoRehydrate, persistStore } from 'redux-persist';
 
 const rootReducers= combineReducers({
   user: userReducer,

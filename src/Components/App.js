@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import '../App.css';
-import MapComponent from './MapComponent'
 import LoginForm  from './LoginForm';
 import UserProfileContainer from './UserProfileContainer'
 import PlayerPage from './PlayerPage';
@@ -12,6 +11,7 @@ import Navbar from './Navbar';
 import 'semantic-ui-css/semantic.min.css';
 import SignUp from './SignUp';
 import {setCurrentUser} from '../Actions/user';
+import { fetchCurrentPark } from '../Actions/park'
 import { connect } from 'react-redux';
 import Header from './Header';
 
@@ -25,6 +25,10 @@ class App extends Component {
     if(jwt_token){
       console.log("Hi from app.js")
       props.setCurrentUser()
+    }
+    if(this.props.location.pathname.split('/')[1] === "parks"){
+       const parkId = this.props.location.pathname.split('/').pop()
+       this.props.fetchCurrentPark(parkId)
     }
   }
 
@@ -56,6 +60,9 @@ function mapDispatchToProps(dispatch){
   return{
     setCurrentUser: () => {
       dispatch(setCurrentUser())
+    },
+    fetchCurrentPark: (parkId) => {
+      dispatch(fetchCurrentPark(parkId))
     }
   }
 }
