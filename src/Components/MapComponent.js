@@ -11,8 +11,8 @@ class MapComponent extends React.Component {
 
   state = {
     currentLocation: {
-      lat: 49.8527,
-      lng: -123.1207
+      lat: 40.758896,
+      lng: -73.985130
     },
     modalOpen: false
   }
@@ -48,19 +48,19 @@ class MapComponent extends React.Component {
         } else {
             this.setState({
                     currentLocation: {
-                        lat: 49.8527,
-                        lng: -123.1207
+                        lat: 40.758896,
+                        lng: -73.985130
                     }
                 }
             );
         }
-    }
+  }
 
   componentDidMount() {
       this.getLocation()
-    }
+  }
 
-    recenterMap() {
+  recenterMap() {
     const map = this.map;
     const curr = this.state.currentLocation;
 
@@ -94,7 +94,6 @@ class MapComponent extends React.Component {
       let zoom = 18;
       let lng = this.state.currentLocation.lng;
       let lat = this.state.currentLocation.lat;
-      // var geoloccontrol = new klokantech.GeolocationControl(mapRef, mapMaxZoom);
       const center = new maps.LatLng(lat, lng);
       const mapConfig = Object.assign({}, {
         center: center,

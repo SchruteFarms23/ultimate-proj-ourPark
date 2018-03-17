@@ -13,13 +13,10 @@ import { fetchCurrentPark } from '../Actions/park'
   class ParkPage extends React.Component{
 
     componentDidMount(){
-      console.log(this.props)
+
       if(!this.props.user_id){
         this.props.setCurrentUser()
       }
-      const parkId = this.props.location.pathname.split('/').pop()
-      this.props.fetchCurrentPark(parkId)
-
     }
 
   render(){
@@ -48,6 +45,7 @@ import { fetchCurrentPark } from '../Actions/park'
 }
 
 function mapStateToProps(state){
+  console.log("mappingStateProps in Park")
   return {
     user: state.user.user,
     user_id: state.user.user_id,
@@ -61,7 +59,7 @@ function mapDispatchToProps(dispatch){
       dispatch(setCurrentUser())
     },
     fetchCurrentPark: (params) => {
-      dispatch(fetchCurrentPark(params)) // Going to put this in parks action
+      dispatch(fetchCurrentPark(params)) 
     }
   }
 }
